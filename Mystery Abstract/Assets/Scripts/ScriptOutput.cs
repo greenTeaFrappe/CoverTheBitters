@@ -4,10 +4,15 @@ using UnityEngine.UI;
 
 public class ScriptOutput : MonoBehaviour
 {
-    public string[] textArray;
+    //public string[] textArray;
 
     //scriptArray·Î ¹Ù²ã¿À±â 
-    
+    struct scriptstruct
+    {
+        public string text;
+        public int index;
+    }
+    public scriptstruct[] scriptArray = new scriptstruct[];
     public Text legacyText;
     public Button myButton;
     public Button myButton1;
@@ -25,5 +30,19 @@ public class ScriptOutput : MonoBehaviour
 
     private IEnumerator UpdateTextWithDelay()
     {
+        for (; currentIndex < scriptArray.Length; currentIndex++)
+        {
+            legacyText.text = scriptArray[currentIndex].text;
+
+            if (currentIndex >= scriptArray.Length)
+            {
+                myButton.gameObject.SetActive(true);
+                myButton1.gameObject.SetActive(true);
+            }
+            else
+            {
+                yield return new WaitForSecond(textChangeInterval);
+            }
+        }
     }
 }
