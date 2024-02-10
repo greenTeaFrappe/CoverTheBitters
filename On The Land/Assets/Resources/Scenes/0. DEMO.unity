@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 23382904}
   - component: {fileID: 23382903}
   - component: {fileID: 23382906}
+  - component: {fileID: 23382907}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -390,19 +391,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9584353790534434a9e281edee2f7b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charNameArray:
+  setA: {fileID: 1767737469}
+  setB: {fileID: 1867324620}
+  texts:
+  - text1
+  - text2
+  - text3
+  - text4
+  - text5
+  facialExpressions: 0000000001000000020000000300000004000000
+  names:
   - "\uAE08\uBC1C\uC5EC\uCE90"
-  - "\uCCAD\uBC1C\uC5EC\uCE90"
-  legacyText: {fileID: 673473883}
-  myButton: {fileID: 1767737469}
-  myButton1: {fileID: 1867324620}
+  - "\uAE08\uBC1C\uC5EC\uCE90"
+  - "\uAE08\uBC1C\uC5EC\uCE90"
+  - "\uAE08\uBC1C\uC5EC\uCE90"
+  - "\uAE08\uBC1C\uC5EC\uCE90"
+  nameText: {fileID: 543431432}
+  scripts: {fileID: 673473883}
+--- !u!114 &23382907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23382902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecae0c1547b741c4483f00756a548676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   img: {fileID: 1890463524}
-  nomal: {fileID: 21300000, guid: 78682272de4cbf84297de1031e29fb2a, type: 3}
-  angry: {fileID: 21300000, guid: a67df237ad1e6ff448e5d36ccc505b9e, type: 3}
-  sad: {fileID: 21300000, guid: c27e9779fdd15854bbdf8f4287d48eb2, type: 3}
-  shy: {fileID: 21300000, guid: ac85b7a9be43e0846ad044ff3c764865, type: 3}
-  smile: {fileID: 21300000, guid: 16cdf07b028b31e4bb4daa12ac7e32ec, type: 3}
-  charNameText: {fileID: 543431432}
 --- !u!1 &472504168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,7 +1153,7 @@ GameObject:
   - component: {fileID: 1890463525}
   - component: {fileID: 1890463524}
   m_Layer: 0
-  m_Name: "\uAE08\uBC1C\uC5EC\uCE90"
+  m_Name: character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
