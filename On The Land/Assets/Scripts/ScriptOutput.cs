@@ -4,94 +4,51 @@ using UnityEngine.UI;
 
 public class ScriptOutput : MonoBehaviour
 {
-    public class scriptStruct
-    {
-        public string text;
-        public int name;
-        public int index;
-    }
+    public Button setA;
+    public Button setB;
 
-    public string[] charNameArray = new string[]
-    {
-        "금발여캐","청발여캐"
-    };
+    // 배열 변수 선언
+    public string[] texts;
+    public int[] facialExpressions;
+    public string[] names;
 
-    public Text legacyText;
+    public Text nameText;
+    public Text scripts;
 
-    public scriptStruct[] scriptArray = new scriptStruct[]
-    {
-        new scriptStruct{text="text1",name=0,index=0},
-        new scriptStruct{text="text2",name=1,index=1},
-        new scriptStruct{text="text3",name=0,index=2},
-        new scriptStruct{text="text4",name=0,index=3},
-        new scriptStruct{text="text5",name=0,index=4},
-     //   // 필요에 따라 더 많은 항목 추가
-    };
-
-    public Button myButton;
-    public Button myButton1;
-
-    public Image img;
-    public Sprite nomal, angry, sad, shy, smile;
-
-    public Text charNameText;
-
-    private int currentIndex = 0;
-    private float textChangeInterval = 2f; // 텍스트 변경 간격 (초)
+    private int count=0;
 
     private void Start()
     {
-        myButton.gameObject.SetActive(false);
-        myButton1.gameObject.SetActive(false);
+        setA.gameObject.SetActive(false);
+        setB.gameObject.SetActive(false);
+    }   
 
-        StartCoroutine(UpdateTextWithDelay());
-    }
-
-    private IEnumerator UpdateTextWithDelay()
+    private void Update()
     {
-        for (; currentIndex < scriptArray.Length; currentIndex++)
+        // 마우스 클릭 감지
+        if (Input.GetMouseButtonDown(0))
         {
-            legacyText.text = scriptArray[currentIndex].text;
-
-            // 이미지 스프라이트 할당 
-
-            if (scriptArray[currentIndex].index == 0)
-            {
-                img.sprite = nomal;
-                Debug.Log("nomal");
-            }
-            else if (scriptArray[currentIndex].index == 1)
-            {
-                img.sprite = angry;
-                Debug.Log("angry");
-            }
-            else if (scriptArray[currentIndex].index == 2)
-            {
-                img.sprite = sad;
-                Debug.Log("sad");
-            }
-            else if (scriptArray[currentIndex].index == 3)
-            {
-                img.sprite = shy;
-                Debug.Log("shy");
-            }
-            else if (scriptArray[currentIndex].index == 4)
-            {
-                img.sprite = smile;
-                Debug.Log("smile");
-            }
-
-            charNameText.text = charNameArray[scriptArray[currentIndex].name];
-
-            if (currentIndex >= scriptArray.Length)
-            {
-                myButton.gameObject.SetActive(true);
-                myButton1.gameObject.SetActive(true);
-            }
-            else
-            {
-                yield return new WaitForSeconds(textChangeInterval);
-            }
+            HandleMouseClick();
         }
     }
+
+    private void HandleMouseClick()
+    {
+        if(count< texts.Length)
+        {
+            nameText.text = names[count];
+            scripts.text = texts[count];
+
+            //state 패턴 적용해야함
+            ScriptOutputState state = GetComponent<ScriptOutputState>();
+            state.SOState(facialExpressions[count], names[count]);
+            count++;
+        }
+        else
+        {
+            setA.gameObject.SetActive(true);
+            setB.gameObject.SetActive(true);
+        }
+    }
+
 }
