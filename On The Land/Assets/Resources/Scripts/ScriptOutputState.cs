@@ -9,8 +9,8 @@ public interface IScriptOutputState
 
 public class StateNomal : IScriptOutputState
 {
-    private string goldGirlPath = "Sprites/금발여캐/nomal.png";
-    private string blueGirlPath = "Sprites/청발여캐/nomal.png";
+    private string goldGirlPath = "Sprites/금발여캐/nomal";
+    private string blueGirlPath = "Sprites/청발여캐/nomal";
 
     public int HandleState(string name, Image img)
     {
