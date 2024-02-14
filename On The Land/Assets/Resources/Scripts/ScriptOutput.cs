@@ -26,7 +26,7 @@ public class ScriptOutput : MonoBehaviour
     private void Update()
     {
         // 마우스 클릭 감지
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space"))
         {
             HandleMouseClick();
         }
