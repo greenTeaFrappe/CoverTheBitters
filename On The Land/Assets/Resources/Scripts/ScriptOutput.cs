@@ -15,7 +15,7 @@ public class ScriptOutput : MonoBehaviour
     public Text nameText;
     public Text scripts;
 
-    private int count=0;
+    public int count=0;
 
     private void Start()
     {
