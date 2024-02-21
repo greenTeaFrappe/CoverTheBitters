@@ -13,6 +13,8 @@ public class logOutput : MonoBehaviour
 
     private ScriptOutput scriptOutput; // ScriptOutput 컴포넌트를 참조하기 위한 변수 추가
 
+    public int logCount;
+
     private void Start()
     {
         scrollRect.gameObject.SetActive(false);
@@ -31,24 +33,21 @@ public class logOutput : MonoBehaviour
 
     private void Update()
     {
+        
         // ScriptOutput 컴포넌트가 존재하고 logText가 null이 아닌지 확인
-        if (logText != null && scriptOutput != null && scriptOutput.count < scriptOutput.texts.Length)
+        if (logText != null && scriptOutput != null && scriptOutput.count < scriptOutput.texts.Length &&logCount==scriptOutput.count)
         {
             // count에 해당하는 스크립트를 logText에 추가
-            logText.text += "\n"+scriptOutput.names[scriptOutput.count] + " : " + scriptOutput.texts[scriptOutput.count] + "\n";
-
-            // count 증가
-            //scriptOutput.count++;
+            logText.text += "\n" + scriptOutput.names[scriptOutput.count] + " : " + scriptOutput.texts[scriptOutput.count] + "\n";
+            logCount++;
         }
-        else if (logText != null && scriptOutput != null && scriptOutput.count >= scriptOutput.texts.Length)
+        else if (logText != null && scriptOutput != null && scriptOutput.count >= scriptOutput.texts.Length &&logCount>=scriptOutput.texts.Length)
         {
             // 스크립트가 끝나면 logText에 추가
-            logText.text += "End of Script\n";
+            Debug.Log("End of Script");
+            logCount = 0;
         }
-        else
-        {
-            Debug.Log("error");
-        }
+        
     }
 
     void TaskOnClick()

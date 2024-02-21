@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ScriptOutput : MonoBehaviour
 {
@@ -25,10 +26,16 @@ public class ScriptOutput : MonoBehaviour
 
     private void Update()
     {
+
         // 마우스 클릭 감지
         if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space"))
         {
-            HandleMouseClick();
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                HandleMouseClick();
+                //클릭 처리
+            }
+
         }
     }
 
