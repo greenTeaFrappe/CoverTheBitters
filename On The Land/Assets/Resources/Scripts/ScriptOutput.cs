@@ -8,6 +8,10 @@ public class ScriptOutput : MonoBehaviour
     public Button setA;
     public Button setB;
 
+    public Button logBtn;
+    public Button backBtn;
+    public ScrollRect scrollRect;
+
     // 배열 변수 선언
     public string[] texts;
     public int[] facialExpressions;
@@ -17,7 +21,7 @@ public class ScriptOutput : MonoBehaviour
     public Text scripts;
 
     public int count=0;
-
+   
     private void Start()
     {
         setA.gameObject.SetActive(false);
@@ -26,16 +30,14 @@ public class ScriptOutput : MonoBehaviour
 
     private void Update()
     {
-
-        // 마우스 클릭 감지
-        if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space"))
+        if(!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf&& logBtn.gameObject.activeSelf)
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            // 마우스 클릭 감지
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
             {
                 HandleMouseClick();
-                //클릭 처리
+                    //클릭 처리
             }
-
         }
     }
 

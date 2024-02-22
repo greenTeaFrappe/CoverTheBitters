@@ -31,38 +31,31 @@ public class logOutput : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-        // ScriptOutput 컴포넌트가 존재하고 logText가 null이 아닌지 확인
-        if (logText != null && scriptOutput != null && scriptOutput.count < scriptOutput.texts.Length &&logCount==scriptOutput.count)
-        {
-            // count에 해당하는 스크립트를 logText에 추가
-            logText.text += "\n" + scriptOutput.names[scriptOutput.count] + " : " + scriptOutput.texts[scriptOutput.count] + "\n";
-            logCount++;
-        }
-        else if (logText != null && scriptOutput != null && scriptOutput.count >= scriptOutput.texts.Length &&logCount>=scriptOutput.texts.Length)
-        {
-            // 스크립트가 끝나면 logText에 추가
-            Debug.Log("End of Script");
-            logCount = 0;
-        }
-        
-    }
-
     void TaskOnClick()
     {
         scrollRect.gameObject.SetActive(true);
         backBtn.gameObject.SetActive(true);
+        
         logBtn.gameObject.SetActive(false);
-
+        
         backBtn.onClick.AddListener(Task2OnClick);
+
+        // ScriptOutput 컴포넌트가 존재하고 logText가 null이 아닌지 확인
+        if (logText != null && scriptOutput != null)
+        {
+            // count 변수만큼의 요소들을 logText에 추가
+            for (int i = 0; i < scriptOutput.count; i++)
+            {
+                logText.text += "\n" + scriptOutput.names[i] + " : " + scriptOutput.texts[i] + "\n";
+            }
+        }
     }
 
     void Task2OnClick()
     {
         scrollRect.gameObject.SetActive(false);
         backBtn.gameObject.SetActive(false);
+        
         logBtn.gameObject.SetActive(true);
     }
 }
