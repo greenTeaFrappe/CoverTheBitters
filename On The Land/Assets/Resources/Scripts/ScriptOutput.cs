@@ -22,10 +22,13 @@ public class ScriptOutput : MonoBehaviour
     public Text nameText;
     public Text scripts;
 
+    public bool isButtonClicked = false;
+
     public int count=0;
     private void autoBtnClick()
     {
         InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
+        isButtonClicked = !isButtonClicked;
     }
 
     private void Start()
@@ -37,7 +40,7 @@ public class ScriptOutput : MonoBehaviour
 
     private void Update()
     {
-        if(!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf&& logBtn.gameObject.activeSelf)
+        if(!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf&& logBtn.gameObject.activeSelf && !isButtonClicked)
         {
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))

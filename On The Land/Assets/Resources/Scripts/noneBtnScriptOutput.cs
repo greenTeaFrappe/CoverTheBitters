@@ -22,10 +22,12 @@ public class noneBtnScriptOutput : MonoBehaviour
     private int count=0;
 
     public string nextSceneName;
+    public bool isButtonClicked = false;
 
     private void autoBtnClick()
     {
         InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
+        isButtonClicked = !isButtonClicked;
     }
 
     private void Start()
@@ -35,7 +37,7 @@ public class noneBtnScriptOutput : MonoBehaviour
 
     private void Update()
     {
-        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf)
+        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf && !isButtonClicked)
         {
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
