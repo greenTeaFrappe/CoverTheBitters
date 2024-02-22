@@ -10,19 +10,40 @@ public class noneBtnScriptOutput : MonoBehaviour
     public int[] facialExpressions;
     public string[] names;
 
+    public Button logBtn;
+    public Button backBtn;
+    public ScrollRect scrollRect;
+
+    public Button autoBtn;
+
     public Text nameText;
     public Text scripts;
 
     private int count=0;
 
     public string nextSceneName;
+    public bool isButtonClicked = false;
+
+    private void autoBtnClick()
+    {
+        InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
+        isButtonClicked = !isButtonClicked;
+    }
+
+    private void Start()
+    {
+        autoBtn.onClick.AddListener(autoBtnClick);
+    }
 
     private void Update()
     {
-        // 마우스 클릭 감지
-        if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space"))
+        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf && !isButtonClicked)
         {
-            HandleMouseClick();
+            // 마우스 클릭 감지
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
+            {
+                HandleMouseClick();
+            }
         }
     }
 
