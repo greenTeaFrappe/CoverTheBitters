@@ -20,6 +20,15 @@ public class ScriptOutput : MonoBehaviour
 
     private void Start()
     {
+
+        nameText.text = names[count];
+        scripts.text = texts[count];
+
+        //state 패턴 적용해야함
+        ScriptOutputState state = GetComponent<ScriptOutputState>();
+        state.SOState(facialExpressions[count], names[count]);
+        count++;
+
         setA.gameObject.SetActive(false);
         setB.gameObject.SetActive(false);
     }   
