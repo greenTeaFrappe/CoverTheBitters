@@ -8,10 +8,6 @@ public class ScriptOutput : MonoBehaviour
     public Button setA;
     public Button setB;
 
-    public Button logBtn;
-    public Button backBtn;
-    public ScrollRect scrollRect;
-
     // 배열 변수 선언
     public string[] texts;
     public int[] facialExpressions;
@@ -24,29 +20,22 @@ public class ScriptOutput : MonoBehaviour
 
     private void Start()
     {
-
-        nameText.text = names[count];
-        scripts.text = texts[count];
-
-        //state 패턴 적용해야함
-        ScriptOutputState state = GetComponent<ScriptOutputState>();
-        state.SOState(facialExpressions[count], names[count]);
-        count++;
-
         setA.gameObject.SetActive(false);
         setB.gameObject.SetActive(false);
     }   
 
     private void Update()
     {
-        if(!(scrollRect.gameObject.activeSelf && backBtn.gameObject.activeSelf && !logBtn.gameObject.activeSelf))
-        { 
-            // 마우스 클릭 감지
-            if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space") )// || 로그 버튼이 setVisible하지 않을때
-                {
-                        HandleMouseClick();
-                        //클릭 처리
-                }
+
+        // 마우스 클릭 감지
+        if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space"))
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                HandleMouseClick();
+                //클릭 처리
+            }
+
         }
     }
 
