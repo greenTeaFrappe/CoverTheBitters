@@ -12,6 +12,8 @@ public class ScriptOutput : MonoBehaviour
     public Button backBtn;
     public ScrollRect scrollRect;
 
+    public Button autoBtn;
+
     // 배열 변수 선언
     public string[] texts;
     public int[] facialExpressions;
@@ -21,12 +23,17 @@ public class ScriptOutput : MonoBehaviour
     public Text scripts;
 
     public int count=0;
-   
+    private void autoBtnClick()
+    {
+        InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
+    }
+
     private void Start()
     {
         setA.gameObject.SetActive(false);
         setB.gameObject.SetActive(false);
-    }   
+        autoBtn.onClick.AddListener(autoBtnClick);
+    }
 
     private void Update()
     {

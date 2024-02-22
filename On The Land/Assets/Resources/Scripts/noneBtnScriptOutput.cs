@@ -14,12 +14,24 @@ public class noneBtnScriptOutput : MonoBehaviour
     public Button backBtn;
     public ScrollRect scrollRect;
 
+    public Button autoBtn;
+
     public Text nameText;
     public Text scripts;
 
     private int count=0;
 
     public string nextSceneName;
+
+    private void autoBtnClick()
+    {
+        InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
+    }
+
+    private void Start()
+    {
+        autoBtn.onClick.AddListener(autoBtnClick);
+    }
 
     private void Update()
     {
@@ -29,7 +41,6 @@ public class noneBtnScriptOutput : MonoBehaviour
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
             {
                 HandleMouseClick();
-                //클릭 처리
             }
         }
     }
