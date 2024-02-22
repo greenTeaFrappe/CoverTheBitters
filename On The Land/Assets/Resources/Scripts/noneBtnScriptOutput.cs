@@ -10,6 +10,10 @@ public class noneBtnScriptOutput : MonoBehaviour
     public int[] facialExpressions;
     public string[] names;
 
+    public Button logBtn;
+    public Button backBtn;
+    public ScrollRect scrollRect;
+
     public Text nameText;
     public Text scripts;
 
@@ -19,10 +23,14 @@ public class noneBtnScriptOutput : MonoBehaviour
 
     private void Update()
     {
-        // 마우스 클릭 감지
-        if (Input.GetMouseButtonDown(0)|| Input.GetKeyDown("space"))
+        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf)
         {
-            HandleMouseClick();
+            // 마우스 클릭 감지
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
+            {
+                HandleMouseClick();
+                //클릭 처리
+            }
         }
     }
 
