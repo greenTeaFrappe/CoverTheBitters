@@ -6,8 +6,8 @@ using System.IO;
 public class playData
 {
     public string time;
-    public int currentSceneNum;
-
+    public string currentSceneNum;
+    public string slotName;
     //»£∞®µµ 
     //hp
 }
@@ -17,11 +17,11 @@ public class dataManager : MonoBehaviour
 
     public static dataManager instance;
 
-    playData nowData = new playData();
+    public playData nowData = new playData();
 
-    string path;
-    string fileName = "save";
-
+    public string path;
+    public int nowSlot;
+    
     private void Awake()
     {
         //ΩÃ±€≈Ê
@@ -36,7 +36,8 @@ public class dataManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
 
-        path = Application.persistentDataPath + "/";
+        path = Application.persistentDataPath + "/save";
+        print(path);
     }
 
 
@@ -48,12 +49,18 @@ public class dataManager : MonoBehaviour
     public void saveData()
     {
         string data = JsonUtility.ToJson(nowData);
-        File.WriteAllText(path + fileName, data);
+        File.WriteAllText(path, data);
     }
 
     public void loadData()
     {
-        string data = File.ReadAllText(path + fileName);
+        string data = File.ReadAllText(path);
         nowData = JsonUtility.FromJson<playData>(data);
+    }
+
+    public void DataClear()
+    {
+        nowSlot = -1;
+        nowData = new playData();
     }
 }

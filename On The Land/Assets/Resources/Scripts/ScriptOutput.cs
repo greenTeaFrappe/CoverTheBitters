@@ -24,6 +24,8 @@ public class ScriptOutput : MonoBehaviour
 
     public bool isButtonClicked = false;
 
+    public string currentStorySceneNumber;
+
     public int count=0;
     private void autoBtnClick()
     {
