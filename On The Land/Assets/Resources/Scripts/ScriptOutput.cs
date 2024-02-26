@@ -27,6 +27,7 @@ public class ScriptOutput : MonoBehaviour
     public string currentStorySceneNumber;
 
     public int count=0;
+   
     private void autoBtnClick()
     {
         InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
