@@ -14,6 +14,9 @@ public class ScriptOutput : MonoBehaviour
 
     public Button autoBtn;
 
+    public GameObject saveScreen;
+    public GameObject loadScreen;
+
     // 배열 변수 선언
     public string[] texts;
     public int[] facialExpressions;
@@ -28,6 +31,7 @@ public class ScriptOutput : MonoBehaviour
 
     public int count=0;
    
+    //자동진행
     private void autoBtnClick()
     {
         InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
@@ -38,12 +42,15 @@ public class ScriptOutput : MonoBehaviour
     {
         setA.gameObject.SetActive(false);
         setB.gameObject.SetActive(false);
+
         autoBtn.onClick.AddListener(autoBtnClick);
     }
 
+    //클릭 시 다음 대사로
     private void Update()
     {
-        if(!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf&& logBtn.gameObject.activeSelf && !isButtonClicked)
+        if(!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf&& logBtn.gameObject.activeSelf && !isButtonClicked
+            &&!saveScreen.gameObject.activeSelf&&!loadScreen.gameObject.activeSelf)
         {
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))

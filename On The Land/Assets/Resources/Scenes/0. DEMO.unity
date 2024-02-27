@@ -331,9 +331,8 @@ GameObject:
   - component: {fileID: 23382907}
   - component: {fileID: 23382908}
   - component: {fileID: 23382909}
-  - component: {fileID: 23382910}
   - component: {fileID: 23382911}
-  - component: {fileID: 23382912}
+  - component: {fileID: 23382913}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -409,6 +408,12 @@ MonoBehaviour:
   backBtn: {fileID: 1792754255}
   scrollRect: {fileID: 1280280937}
   autoBtn: {fileID: 1459070476}
+  saveScreen: {fileID: 159055478}
+  loadScreen: {fileID: 758611416}
+  saveBtn: {fileID: 398616888}
+  loadBtn: {fileID: 1144972646}
+  saveBackBtn: {fileID: 1720531112}
+  loadBackBtn: {fileID: 1792754255}
   texts:
   - text1
   - text2
@@ -498,20 +503,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextSceneName: 4. 1-B
   changeBtn: {fileID: 1867324620}
---- !u!114 &23382910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23382902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4353fde5ccfc084eb5a25351df8c161, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextSceneName: 8. SAVE
-  changeBtn: {fileID: 398616888}
 --- !u!114 &23382911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +520,7 @@ MonoBehaviour:
   scrollRect: {fileID: 1280280937}
   logText: {fileID: 740767169}
   logCount: 0
---- !u!114 &23382912
+--- !u!114 &23382913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -538,11 +529,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 23382902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4353fde5ccfc084eb5a25351df8c161, type: 3}
+  m_Script: {fileID: 11500000, guid: 529602041dea5a643ba1c7f05828b254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: 5. LOAD
-  changeBtn: {fileID: 1144972646}
+  saveScreen: {fileID: 390290358}
+  loadScreen: {fileID: 1149900308}
+  saveBtn: {fileID: 398616888}
+  loadBtn: {fileID: 1144972646}
+  saveBackBtn: {fileID: 1720531112}
+  loadBackBtn: {fileID: 248250360}
 --- !u!1 &34943473
 GameObject:
   m_ObjectHideFlags: 0

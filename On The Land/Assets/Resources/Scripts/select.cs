@@ -7,7 +7,7 @@ using System.IO;
 
 public class select : MonoBehaviour
 {
-    public GameObject creat;	// 플레이어 닉네임 입력UI
+    public GameObject creat;	
     public Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
     public Text newPlayerData;	// 새로 입력된 플레이어의 슬롯 저장명
 
@@ -37,34 +37,34 @@ public class select : MonoBehaviour
         dataManager.instance.DataClear();
     }
 
-    //public void slot(int number)	// 슬롯의 기능 구현
-    //{
-    //    dataManager.instance.nowSlot = number;	// 슬롯의 번호를 슬롯번호로 입력함.
-    //
-    //    if (saveFile[number])	// bool 배열에서 현재 슬롯번호가 true라면 = 데이터 존재한다는 뜻
-    //    {
-    //        dataManager.instance.loadData();	// 데이터를 로드하고
-    //        GoGame();	// 게임씬으로 이동
-    //    }
-    //    else	// bool 배열에서 현재 슬롯번호가 false라면 데이터가 없다는 뜻
-    //    {
-    //        Creat();	// 플레이어 닉네임 입력 UI 활성화
-    //    }
-    //}
+    public void slot(int number)	// 슬롯의 기능 구현
+    {
+        dataManager.instance.nowSlot = number;	// 슬롯의 번호를 슬롯번호로 입력함.
+    
+        if (saveFile[number])	// bool 배열에서 현재 슬롯번호가 true라면 = 데이터 존재한다는 뜻
+        {
+            dataManager.instance.loadData();	// 데이터를 로드하고
+            GoGame();	// 게임씬으로 이동
+        }
+        else	// bool 배열에서 현재 슬롯번호가 false라면 데이터가 없다는 뜻
+        {
+            Creat();	
+        }
+    }
 
-    //public void Creat()	// 플레이어 닉네임 입력 UI를 활성화하는 메소드
-    //{
-    //    creat.gameObject.SetActive(true);
-    //}
+    public void Creat()
+    {
+        Debug.Log("Activate Creat() ");
+    }
 
     public void GoGame()	// 게임씬으로 이동
     {
         if (!saveFile[dataManager.instance.nowSlot])	// 현재 슬롯번호의 데이터가 없다면
         {
-            //dataManager.instance.nowData.slotName = newPlayerData.text; // 입력한 이름을 복사해옴
             dataManager.instance.nowData.currentSceneNum = scriptOutput.currentStorySceneNumber;
             dataManager.instance.saveData(); // 현재 정보를 저장함.
         }
+        
         SceneManager.LoadScene(1); // 게임씬으로 이동
     }
 }

@@ -4,18 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class saveLoadScreen : MonoBehaviour
-{
 
+public class SaveLoadScreen : MonoBehaviour
+{
     public GameObject saveScreen;
     public GameObject loadScreen;
-
+    
     public Button saveBtn;
     public Button loadBtn;
-
+    
     public Button saveBackBtn;
     public Button loadBackBtn;
 
+    ScriptOutput scriptOutput = new ScriptOutput();
 
     // Start is called before the first frame update
     void Start()

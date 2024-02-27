@@ -14,7 +14,6 @@ public class playData
 
 public class dataManager : MonoBehaviour
 {
-
     public static dataManager instance;
 
     public playData nowData = new playData();
