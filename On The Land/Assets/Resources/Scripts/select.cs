@@ -7,7 +7,7 @@ using System.IO;
 
 public class select : MonoBehaviour
 {
-    public GameObject creat;	
+    //public GameObject creat;	
     public Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
     public Text newPlayerData;	// 새로 입력된 플레이어의 슬롯 저장명
 
