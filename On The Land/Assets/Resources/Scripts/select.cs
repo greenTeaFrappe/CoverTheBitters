@@ -7,12 +7,12 @@ using System.IO;
 
 public class select : MonoBehaviour
 {
-    public GameObject creat;	
+    //public GameObject creat;	
     public Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
     public Text newPlayerData;	// 새로 입력된 플레이어의 슬롯 저장명
 
     bool[] saveFile = new bool[4];	// 세이브파일 존재유무 저장
-    ScriptOutput scriptOutput = new ScriptOutput();
+    public ScriptOutput scriptOutput;
 
     void Start()
     {
@@ -61,7 +61,8 @@ public class select : MonoBehaviour
     {
         if (!saveFile[dataManager.instance.nowSlot])	// 현재 슬롯번호의 데이터가 없다면
         {
-            dataManager.instance.nowData.currentSceneNum = scriptOutput.currentStorySceneNumber;
+            string currentStorySceneNumber = scriptOutput.currentStorySceneNumber;
+            dataManager.instance.nowData.currentSceneNum = currentStorySceneNumber;
             dataManager.instance.saveData(); // 현재 정보를 저장함.
         }
         
