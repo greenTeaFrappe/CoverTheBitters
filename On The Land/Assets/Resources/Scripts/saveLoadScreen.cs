@@ -16,13 +16,15 @@ public class SaveLoadScreen : MonoBehaviour
     public Button saveBackBtn;
     public Button loadBackBtn;
 
-    ScriptOutput scriptOutput = new ScriptOutput();
+    //private ScriptOutput scriptOutput;
 
     // Start is called before the first frame update
     void Start()
     {
         saveScreen.gameObject.SetActive(false);
         loadScreen.gameObject.SetActive(false);
+        
+        //scriptOutput = GetComponent<ScriptOutput>();
 
         saveBtn.onClick.AddListener(saveTaskOnClick);
         loadBtn.onClick.AddListener(loadTaskOnClick);

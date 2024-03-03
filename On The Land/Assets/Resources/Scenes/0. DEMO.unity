@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 23382909}
   - component: {fileID: 23382911}
   - component: {fileID: 23382913}
+  - component: {fileID: 23382914}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -410,10 +411,6 @@ MonoBehaviour:
   autoBtn: {fileID: 1459070476}
   saveScreen: {fileID: 159055478}
   loadScreen: {fileID: 758611416}
-  saveBtn: {fileID: 398616888}
-  loadBtn: {fileID: 1144972646}
-  saveBackBtn: {fileID: 1720531112}
-  loadBackBtn: {fileID: 1792754255}
   texts:
   - text1
   - text2
@@ -538,6 +535,21 @@ MonoBehaviour:
   loadBtn: {fileID: 1144972646}
   saveBackBtn: {fileID: 1720531112}
   loadBackBtn: {fileID: 248250360}
+--- !u!114 &23382914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23382902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74f90f4231e30246a176868aeb1f8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creat: {fileID: 0}
+  slotText: []
+  newPlayerData: {fileID: 0}
 --- !u!1 &34943473
 GameObject:
   m_ObjectHideFlags: 0
