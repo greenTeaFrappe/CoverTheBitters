@@ -13,12 +13,12 @@ public class select : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
+            // 모두 삭제할 생각이면 해당 코드 주석 풀기
+            // PlayerPrefs.DeleteAll();
+
             int slotIndex = i; // Corrected closure issue
-
-            // 각 버튼에 클릭 이벤트를 추가합니다.
-            Debug.Log(slots[i]);
             slots[i].onClick.AddListener(() => OnSlotClicked(slotIndex));
-
+            
 
             if (PlayerPrefs.HasKey($"Slot{i}"))  // 데이터가 있는 경우
             {
@@ -44,14 +44,14 @@ public class select : MonoBehaviour
 
     private void OnSlotClicked(int slotIndex) // Corrected method signature
     {
-        //좌클릭 & 데이터가 있는 경우에만 load 
-        if (Input.GetMouseButtonDown(0) && IsSlotOccupied(slotIndex))
+        //좌클릭 & 데이터가 있는 경우에만 load -> 인데 왜 더블클릭만 인식될까요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+        if (Input.GetMouseButtonDown(0) && slots[slotIndex].GetComponentInChildren<Text>().text != "비어있음")
         {
+            Debug.Log("hi");
             SceneManager.LoadScene(slots[slotIndex].GetComponentInChildren<Text>().text); // Corrected scene loading
         }
         else
         {
-            Debug.Log("hi");
             // 현재 씬의 이름을 가져옵니다.
             string currentSceneName = SceneManager.GetActiveScene().name;
 
@@ -67,11 +67,6 @@ public class select : MonoBehaviour
             slots[slotIndex].GetComponentInChildren<Text>().text = currentSceneName;
         }
 
-    }
-
-    public bool IsSlotOccupied(int slotNumber)
-    {
-        return saveFile[slotNumber]; // 해당 슬롯 번호의 데이터 유무를 반환합니다.
     }
 
 }
