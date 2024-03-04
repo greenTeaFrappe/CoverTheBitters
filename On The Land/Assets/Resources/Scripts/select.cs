@@ -12,7 +12,8 @@ public class select : MonoBehaviour
     public Text newPlayerData;	// 새로 입력된 플레이어의 슬롯 저장명
 
     bool[] saveFile = new bool[4];	// 세이브파일 존재유무 저장
-    public ScriptOutput scriptOutput;
+    public btnScenesChange btnScenesChange;
+    public noneBtnScriptOutput noneBtnScriptOutput;
 
     void Start()
     {
@@ -57,15 +58,37 @@ public class select : MonoBehaviour
         Debug.Log("Activate Creat() ");
     }
 
-    public void GoGame()	// 게임씬으로 이동
+    public void GoGame()
     {
-        if (!saveFile[dataManager.instance.nowSlot])	// 현재 슬롯번호의 데이터가 없다면
+        string currentStorySceneNumber = ""; // 변수를 루프 밖에서 선언
+
+        if (!saveFile[dataManager.instance.nowSlot]) // 데이터가 없다면
         {
-            string currentStorySceneNumber = scriptOutput.currentStorySceneNumber;
+            // 버튼이 있는지 확인하고 씬 넘버 결정
+            GameObject[] gameObjects = FindObjectsOfType<GameObject>();
+            foreach (GameObject go in gameObjects)
+            {
+                Button button = go.GetComponent<Button>();
+                if (button != null)
+                {
+                    currentStorySceneNumber = btnScenesChange.nextSceneName;
+                }
+                else
+                {
+                    currentStorySceneNumber = noneBtnScriptOutput.nextSceneName;
+                }
+            }
+
+            // 현재 씬 정보 저장
             dataManager.instance.nowData.currentSceneNum = currentStorySceneNumber;
-            dataManager.instance.saveData(); // 현재 정보를 저장함.
+            dataManager.instance.nowData.currentTime = DateTime.Now.ToString();
+
+            // 데이터 저장
+            dataManager.instance.saveData();
         }
-        
-        SceneManager.LoadScene(1); // 게임씬으로 이동
+
+        // 게임 씬으로 이동
+        SceneManager.LoadScene(1);
     }
+
 }
