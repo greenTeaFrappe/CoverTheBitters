@@ -5,7 +5,7 @@ using System.IO;
 
 public class playData
 {
-    public string time;
+    public string currentTime;
     public string currentSceneNum;
     public string slotName;
     //»£∞®µµ 
@@ -23,20 +23,20 @@ public class dataManager : MonoBehaviour
     
     private void Awake()
     {
-        //ΩÃ±€≈Ê
+        //ΩÃ±€≈Ê pattern start
         if (instance == null)
         {
             instance = this;
-
         }
         else if (instance != this)
         {
             Destroy(instance.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+        
+        path = Application.dataPath + "/Resources/SaveData/";  
 
-        path = Application.persistentDataPath + "/save";
-        print(path);
+
     }
 
 
