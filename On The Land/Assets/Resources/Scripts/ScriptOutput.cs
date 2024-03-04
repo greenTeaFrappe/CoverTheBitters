@@ -14,7 +14,6 @@ public class ScriptOutput : MonoBehaviour
 
     public Button autoBtn;
 
-    public GameObject saveScreen;
     public GameObject loadScreen;
 
     // 배열 변수 선언
@@ -50,7 +49,7 @@ public class ScriptOutput : MonoBehaviour
     private void Update()
     {
         if(!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf&& logBtn.gameObject.activeSelf && !isButtonClicked
-            &&!saveScreen.gameObject.activeSelf&&!loadScreen.gameObject.activeSelf)
+            &&!loadScreen.gameObject.activeSelf)
         {
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))

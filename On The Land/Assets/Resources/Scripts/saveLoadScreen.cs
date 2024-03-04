@@ -7,23 +7,18 @@ using UnityEngine.SceneManagement;
 
 public class saveLoadScreen : MonoBehaviour
 {
-    public GameObject saveScreen;
     public GameObject loadScreen;
     
-    public Button saveBtn;
     public Button loadBtn;
     
-    public Button saveBackBtn;
     public Button loadBackBtn;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        saveScreen.gameObject.SetActive(false);
         loadScreen.gameObject.SetActive(false);
 
-        saveBtn.onClick.AddListener(saveTaskOnClick);
         loadBtn.onClick.AddListener(loadTaskOnClick);
     }
 
@@ -33,13 +28,7 @@ public class saveLoadScreen : MonoBehaviour
         
     }
 
-    void saveTaskOnClick()
-    {
-        saveScreen.gameObject.SetActive(true);
-        
-        saveBackBtn.onClick.AddListener(saveTask2OnClick);
-    }
-
+ 
     void loadTaskOnClick()
     {
         loadScreen.gameObject.SetActive(true);
@@ -47,11 +36,6 @@ public class saveLoadScreen : MonoBehaviour
         loadBackBtn.onClick.AddListener(loadTask2OnClick);
     }
 
-    void saveTask2OnClick()
-    {
-        saveScreen.gameObject.SetActive(false);
-        
-    }
 
     void loadTask2OnClick()
     {

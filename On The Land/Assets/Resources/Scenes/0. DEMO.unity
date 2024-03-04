@@ -332,8 +332,8 @@ GameObject:
   - component: {fileID: 23382908}
   - component: {fileID: 23382909}
   - component: {fileID: 23382911}
-  - component: {fileID: 23382913}
   - component: {fileID: 23382914}
+  - component: {fileID: 23382915}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -517,7 +517,24 @@ MonoBehaviour:
   scrollRect: {fileID: 1280280937}
   logText: {fileID: 740767169}
   logCount: 0
---- !u!114 &23382913
+--- !u!114 &23382914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23382902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74f90f4231e30246a176868aeb1f8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotText:
+  - {fileID: 491769157}
+  - {fileID: 54436458}
+  - {fileID: 321558645}
+  - {fileID: 707859357}
+--- !u!114 &23382915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -535,21 +552,6 @@ MonoBehaviour:
   loadBtn: {fileID: 1144972646}
   saveBackBtn: {fileID: 1720531112}
   loadBackBtn: {fileID: 248250360}
---- !u!114 &23382914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23382902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a74f90f4231e30246a176868aeb1f8da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotText: []
-  newPlayerData: {fileID: 1010756091}
-  scriptOutput: {fileID: 23382906}
 --- !u!1 &34943473
 GameObject:
   m_ObjectHideFlags: 0
