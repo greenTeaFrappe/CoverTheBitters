@@ -5,28 +5,20 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class SaveLoadScreen : MonoBehaviour
+public class saveLoadScreen : MonoBehaviour
 {
-    public GameObject saveScreen;
     public GameObject loadScreen;
     
-    public Button saveBtn;
     public Button loadBtn;
     
-    public Button saveBackBtn;
     public Button loadBackBtn;
 
-    //private ScriptOutput scriptOutput;
 
     // Start is called before the first frame update
     void Start()
     {
-        saveScreen.gameObject.SetActive(false);
         loadScreen.gameObject.SetActive(false);
-        
-        //scriptOutput = GetComponent<ScriptOutput>();
 
-        saveBtn.onClick.AddListener(saveTaskOnClick);
         loadBtn.onClick.AddListener(loadTaskOnClick);
     }
 
@@ -36,13 +28,7 @@ public class SaveLoadScreen : MonoBehaviour
         
     }
 
-    void saveTaskOnClick()
-    {
-        saveScreen.gameObject.SetActive(true);
-        
-        saveBackBtn.onClick.AddListener(saveTask2OnClick);
-    }
-
+ 
     void loadTaskOnClick()
     {
         loadScreen.gameObject.SetActive(true);
@@ -50,11 +36,6 @@ public class SaveLoadScreen : MonoBehaviour
         loadBackBtn.onClick.AddListener(loadTask2OnClick);
     }
 
-    void saveTask2OnClick()
-    {
-        saveScreen.gameObject.SetActive(false);
-        
-    }
 
     void loadTask2OnClick()
     {
