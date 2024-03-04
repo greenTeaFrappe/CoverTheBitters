@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System; 
 
 public class select : MonoBehaviour
 {
@@ -12,15 +13,13 @@ public class select : MonoBehaviour
     public Text newPlayerData;	// 새로 입력된 플레이어의 슬롯 저장명
 
     bool[] saveFile = new bool[4];	// 세이브파일 존재유무 저장
-    public btnScenesChange btnScenesChange;
-    public noneBtnScriptOutput noneBtnScriptOutput;
 
     void Start()
     {
-        
         // 슬롯별로 저장된 데이터가 존재하는지 판단.
         for (int i = 0; i < 4; i++)
         {
+            Debug.Log(dataManager.instance.path);
             if (File.Exists(dataManager.instance.path + $"{i}"))	// 데이터가 있는 경우
             {
                 saveFile[i] = true;			// 해당 슬롯 번호의 bool배열 true로 변환
@@ -28,6 +27,7 @@ public class select : MonoBehaviour
                 dataManager.instance.nowSlot = i;	// 선택한 슬롯 번호 저장
                 dataManager.instance.loadData();	// 해당 슬롯 데이터 불러옴
                 slotText[i].text = dataManager.instance.nowData.currentSceneNum;	// 버튼에 저장된 씬 넘버 표시
+                
             }
             else	// 데이터가 없는 경우
             {
@@ -57,30 +57,21 @@ public class select : MonoBehaviour
     {
         Debug.Log("Activate Creat() ");
     }
-    
+
+
+
+
     public void GoGame()
     {
-        string currentStorySceneNumber = ""; // 변수를 루프 밖에서 선언
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        PlayerPrefs.SetString("CurrentSceneName", currentSceneName);
 
         if (!saveFile[dataManager.instance.nowSlot]) // 데이터가 없다면
         {
-            // 버튼이 있는지 확인하고 씬 넘버 결정
-            GameObject[] gameObjects = FindObjectsOfType<GameObject>();
-            foreach (GameObject go in gameObjects)
-            {
-                Button button = go.GetComponent<Button>();
-                if (button != null)
-                {
-                    currentStorySceneNumber = btnScenesChange.nextSceneName;
-                }
-                else
-                {
-                    currentStorySceneNumber = noneBtnScriptOutput.nextSceneName;
-                }
-            }
 
             // 현재 씬 정보 저장
-            dataManager.instance.nowData.currentSceneNum = currentStorySceneNumber;
+            dataManager.instance.nowData.currentSceneNum = currentSceneName;
             dataManager.instance.nowData.currentTime = DateTime.Now.ToString();
 
             // 데이터 저장
