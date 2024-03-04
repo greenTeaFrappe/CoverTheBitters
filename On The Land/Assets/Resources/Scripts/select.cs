@@ -8,46 +8,46 @@ using System.IO;
 public class select : MonoBehaviour
 {
     //public GameObject creat;	
-    public Text[] slotText;		// ½½·Ô¹öÆ° ¾Æ·¡¿¡ Á¸ÀçÇÏ´Â Textµé
-    public Text newPlayerData;	// »õ·Î ÀÔ·ÂµÈ ÇÃ·¹ÀÌ¾îÀÇ ½½·Ô ÀúÀå¸í
+    public Text[] slotText;		// ìŠ¬ë¡¯ë²„íŠ¼ ì•„ë˜ì— ì¡´ì¬í•˜ëŠ” Textë“¤
+    public Text newPlayerData;	// ìƒˆë¡œ ì…ë ¥ëœ í”Œë ˆì´ì–´ì˜ ìŠ¬ë¡¯ ì €ì¥ëª…
 
-    bool[] saveFile = new bool[4];	// ¼¼ÀÌºêÆÄÀÏ Á¸ÀçÀ¯¹« ÀúÀå
+    bool[] saveFile = new bool[4];	// ì„¸ì´ë¸ŒíŒŒì¼ ì¡´ì¬ìœ ë¬´ ì €ì¥
     public btnScenesChange btnScenesChange;
     public noneBtnScriptOutput noneBtnScriptOutput;
 
     void Start()
     {
         
-        // ½½·Ôº°·Î ÀúÀåµÈ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ´ÂÁö ÆÇ´Ü.
+        // ìŠ¬ë¡¯ë³„ë¡œ ì €ì¥ëœ ë°ì´í„°ê°€ ì¡´ì¬í•˜ëŠ”ì§€ íŒë‹¨.
         for (int i = 0; i < 4; i++)
         {
-            if (File.Exists(dataManager.instance.path + $"{i}"))	// µ¥ÀÌÅÍ°¡ ÀÖ´Â °æ¿ì
+            if (File.Exists(dataManager.instance.path + $"{i}"))	// ë°ì´í„°ê°€ ìˆëŠ” ê²½ìš°
             {
-                saveFile[i] = true;			// ÇØ´ç ½½·Ô ¹øÈ£ÀÇ bool¹è¿­ true·Î º¯È¯
+                saveFile[i] = true;			// í•´ë‹¹ ìŠ¬ë¡¯ ë²ˆí˜¸ì˜ boolë°°ì—´ trueë¡œ ë³€í™˜
                 
-                dataManager.instance.nowSlot = i;	// ¼±ÅÃÇÑ ½½·Ô ¹øÈ£ ÀúÀå
-                dataManager.instance.loadData();	// ÇØ´ç ½½·Ô µ¥ÀÌÅÍ ºÒ·¯¿È
-                slotText[i].text = dataManager.instance.nowData.currentSceneNum;	// ¹öÆ°¿¡ ÀúÀåµÈ ¾À ³Ñ¹ö Ç¥½Ã
+                dataManager.instance.nowSlot = i;	// ì„ íƒí•œ ìŠ¬ë¡¯ ë²ˆí˜¸ ì €ì¥
+                dataManager.instance.loadData();	// í•´ë‹¹ ìŠ¬ë¡¯ ë°ì´í„° ë¶ˆëŸ¬ì˜´
+                slotText[i].text = dataManager.instance.nowData.currentSceneNum;	// ë²„íŠ¼ì— ì €ì¥ëœ ì”¬ ë„˜ë²„ í‘œì‹œ
             }
-            else	// µ¥ÀÌÅÍ°¡ ¾ø´Â °æ¿ì
+            else	// ë°ì´í„°ê°€ ì—†ëŠ” ê²½ìš°
             {
-                slotText[i].text = "ºñ¾îÀÖÀ½";
+                slotText[i].text = "ë¹„ì–´ìˆìŒ";
             }
         }
-        // ºÒ·¯¿Â µ¥ÀÌÅÍ¸¦ ÃÊ±âÈ­½ÃÅ´.(¹öÆ°¿¡ ´Ğ³×ÀÓÀ» Ç¥ÇöÇÏ±âÀ§ÇÔÀÌ¾ú±â ¶§¹®)
+        // ë¶ˆëŸ¬ì˜¨ ë°ì´í„°ë¥¼ ì´ˆê¸°í™”ì‹œí‚´.(ë²„íŠ¼ì— ë‹‰ë„¤ì„ì„ í‘œí˜„í•˜ê¸°ìœ„í•¨ì´ì—ˆê¸° ë•Œë¬¸)
         dataManager.instance.DataClear();
     }
 
-    public void slot(int number)	// ½½·ÔÀÇ ±â´É ±¸Çö
+    public void slot(int number)	// ìŠ¬ë¡¯ì˜ ê¸°ëŠ¥ êµ¬í˜„
     {
-        dataManager.instance.nowSlot = number;	// ½½·ÔÀÇ ¹øÈ£¸¦ ½½·Ô¹øÈ£·Î ÀÔ·ÂÇÔ.
+        dataManager.instance.nowSlot = number;	// ìŠ¬ë¡¯ì˜ ë²ˆí˜¸ë¥¼ ìŠ¬ë¡¯ë²ˆí˜¸ë¡œ ì…ë ¥í•¨.
     
-        if (saveFile[number])	// bool ¹è¿­¿¡¼­ ÇöÀç ½½·Ô¹øÈ£°¡ true¶ó¸é = µ¥ÀÌÅÍ Á¸ÀçÇÑ´Ù´Â ¶æ
+        if (saveFile[number])	// bool ë°°ì—´ì—ì„œ í˜„ì¬ ìŠ¬ë¡¯ë²ˆí˜¸ê°€ trueë¼ë©´ = ë°ì´í„° ì¡´ì¬í•œë‹¤ëŠ” ëœ»
         {
-            dataManager.instance.loadData();	// µ¥ÀÌÅÍ¸¦ ·ÎµåÇÏ°í
-            GoGame();	// °ÔÀÓ¾ÀÀ¸·Î ÀÌµ¿
+            dataManager.instance.loadData();	// ë°ì´í„°ë¥¼ ë¡œë“œí•˜ê³ 
+            GoGame();	// ê²Œì„ì”¬ìœ¼ë¡œ ì´ë™
         }
-        else	// bool ¹è¿­¿¡¼­ ÇöÀç ½½·Ô¹øÈ£°¡ false¶ó¸é µ¥ÀÌÅÍ°¡ ¾ø´Ù´Â ¶æ
+        else	// bool ë°°ì—´ì—ì„œ í˜„ì¬ ìŠ¬ë¡¯ë²ˆí˜¸ê°€ falseë¼ë©´ ë°ì´í„°ê°€ ì—†ë‹¤ëŠ” ëœ»
         {
             Creat();	
         }
@@ -57,14 +57,14 @@ public class select : MonoBehaviour
     {
         Debug.Log("Activate Creat() ");
     }
-
+    
     public void GoGame()
     {
-        string currentStorySceneNumber = ""; // º¯¼ö¸¦ ·çÇÁ ¹Û¿¡¼­ ¼±¾ğ
+        string currentStorySceneNumber = ""; // ë³€ìˆ˜ë¥¼ ë£¨í”„ ë°–ì—ì„œ ì„ ì–¸
 
-        if (!saveFile[dataManager.instance.nowSlot]) // µ¥ÀÌÅÍ°¡ ¾ø´Ù¸é
+        if (!saveFile[dataManager.instance.nowSlot]) // ë°ì´í„°ê°€ ì—†ë‹¤ë©´
         {
-            // ¹öÆ°ÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ°í ¾À ³Ñ¹ö °áÁ¤
+            // ë²„íŠ¼ì´ ìˆëŠ”ì§€ í™•ì¸í•˜ê³  ì”¬ ë„˜ë²„ ê²°ì •
             GameObject[] gameObjects = FindObjectsOfType<GameObject>();
             foreach (GameObject go in gameObjects)
             {
@@ -79,16 +79,17 @@ public class select : MonoBehaviour
                 }
             }
 
-            // ÇöÀç ¾À Á¤º¸ ÀúÀå
+            // í˜„ì¬ ì”¬ ì •ë³´ ì €ì¥
             dataManager.instance.nowData.currentSceneNum = currentStorySceneNumber;
             dataManager.instance.nowData.currentTime = DateTime.Now.ToString();
 
-            // µ¥ÀÌÅÍ ÀúÀå
+            // ë°ì´í„° ì €ì¥
             dataManager.instance.saveData();
         }
 
-        // °ÔÀÓ ¾ÀÀ¸·Î ÀÌµ¿
+        // ê²Œì„ ì”¬ìœ¼ë¡œ ì´ë™
         SceneManager.LoadScene(1);
     }
+
 
 }
