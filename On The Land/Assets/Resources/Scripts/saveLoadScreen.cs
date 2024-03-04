@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class SaveLoadScreen : MonoBehaviour
+public class saveLoadScreen : MonoBehaviour
 {
     public GameObject saveScreen;
     public GameObject loadScreen;
@@ -16,15 +16,12 @@ public class SaveLoadScreen : MonoBehaviour
     public Button saveBackBtn;
     public Button loadBackBtn;
 
-    //private ScriptOutput scriptOutput;
 
     // Start is called before the first frame update
     void Start()
     {
         saveScreen.gameObject.SetActive(false);
         loadScreen.gameObject.SetActive(false);
-        
-        //scriptOutput = GetComponent<ScriptOutput>();
 
         saveBtn.onClick.AddListener(saveTaskOnClick);
         loadBtn.onClick.AddListener(loadTaskOnClick);

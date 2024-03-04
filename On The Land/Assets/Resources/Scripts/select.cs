@@ -1,86 +1,70 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.IO;
-using System; 
+using System;
 
 public class select : MonoBehaviour
 {
-    //public GameObject creat;	
-    public Text[] slotText;		// 슬롯버튼 아래에 존재하는 Text들
-    public Text newPlayerData;	// 새로 입력된 플레이어의 슬롯 저장명
+    public Text[] slotText;     // 슬롯 버튼 아래에 있는 텍스트들
 
-    bool[] saveFile = new bool[4];	// 세이브파일 존재유무 저장
+    bool[] saveFile = new bool[4]; // 세이브 파일이 있는지 여부를 저장하는 배열
 
     void Start()
     {
-        // 슬롯별로 저장된 데이터가 존재하는지 판단.
+        // 각 슬롯에 데이터가 있는지 확인합니다.
         for (int i = 0; i < 4; i++)
         {
-            Debug.Log(dataManager.instance.path);
-            if (File.Exists(dataManager.instance.path + $"{i}"))	// 데이터가 있는 경우
+            if (PlayerPrefs.HasKey($"Slot{i}"))  // 데이터가 있는 경우
             {
-                saveFile[i] = true;			// 해당 슬롯 번호의 bool배열 true로 변환
-                
-                dataManager.instance.nowSlot = i;	// 선택한 슬롯 번호 저장
-                dataManager.instance.loadData();	// 해당 슬롯 데이터 불러옴
-                slotText[i].text = dataManager.instance.nowData.currentSceneNum;	// 버튼에 저장된 씬 넘버 표시
-                
+                saveFile[i] = true; // 해당 슬롯을 true로 설정
+
+                // 슬롯의 데이터를 로드합니다.
+                string savedData = PlayerPrefs.GetString($"Slot{i}");
+                string[] dataParts = savedData.Split('|');
+
+                // 버튼에 씬 번호를 표시합니다.
+                slotText[i].text = dataParts[0];
             }
-            else	// 데이터가 없는 경우
+            else  // 데이터가 없는 경우
             {
                 slotText[i].text = "비어있음";
             }
         }
-        // 불러온 데이터를 초기화시킴.(버튼에 닉네임을 표현하기위함이었기 때문)
-        dataManager.instance.DataClear();
     }
 
-    public void slot(int number)	// 슬롯의 기능 구현
+    public void Slot(int number) // 슬롯의 기능
     {
-        dataManager.instance.nowSlot = number;	// 슬롯의 번호를 슬롯번호로 입력함.
-    
-        if (saveFile[number])	// bool 배열에서 현재 슬롯번호가 true라면 = 데이터 존재한다는 뜻
+        if (IsSlotOccupied(number))  // 이 슬롯에 데이터가 있는 경우
         {
-            dataManager.instance.loadData();	// 데이터를 로드하고
-            GoGame();	// 게임씬으로 이동
+            // 데이터를 로드하고 게임으로 이동합니다.
+            string savedData = PlayerPrefs.GetString($"Slot{number}");
+            string[] dataParts = savedData.Split('|');
+
+            // 현재 씬 정보를 저장합니다.
+            PlayerPrefs.SetString("CurrentSceneName", dataParts[0]);
+
+            GoGame();
         }
-        else	// bool 배열에서 현재 슬롯번호가 false라면 데이터가 없다는 뜻
+        else  // 이 슬롯에 데이터가 없는 경우
         {
-            Creat();	
+            CreateNew();
         }
     }
 
-    public void Creat()
+    public bool IsSlotOccupied(int slotNumber)
     {
-        Debug.Log("Activate Creat() ");
+        return saveFile[slotNumber]; // 해당 슬롯 번호의 데이터 유무를 반환합니다.
     }
 
-
-
+    public void CreateNew()
+    {
+        Debug.Log("CreateNew() 함수 활성화 ");
+        // 새로운 슬롯을 만드는 코드를 여기에 추가할 수 있습니다.
+    }
 
     public void GoGame()
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        PlayerPrefs.SetString("CurrentSceneName", currentSceneName);
-
-        if (!saveFile[dataManager.instance.nowSlot]) // 데이터가 없다면
-        {
-
-            // 현재 씬 정보 저장
-            dataManager.instance.nowData.currentSceneNum = currentSceneName;
-            dataManager.instance.nowData.currentTime = DateTime.Now.ToString();
-
-            // 데이터 저장
-            dataManager.instance.saveData();
-        }
-
-        // 게임 씬으로 이동
+        // 게임 씬으로 이동합니다.
         SceneManager.LoadScene(1);
     }
-
-
 }
