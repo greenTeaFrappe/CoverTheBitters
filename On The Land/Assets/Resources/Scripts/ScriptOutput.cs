@@ -26,8 +26,6 @@ public class ScriptOutput : MonoBehaviour
 
     public bool isButtonClicked = false;
 
-    public string currentStorySceneNumber;
-
     public int count=0;
    
     //자동진행
@@ -48,8 +46,9 @@ public class ScriptOutput : MonoBehaviour
     //클릭 시 다음 대사로
     private void Update()
     {
-        if(!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf&& logBtn.gameObject.activeSelf && !isButtonClicked
-            &&!loadScreen.gameObject.activeSelf)
+
+        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf && !isButtonClicked
+            && !loadScreen.gameObject.activeSelf)
         {
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
