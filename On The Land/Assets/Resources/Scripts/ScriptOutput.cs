@@ -59,8 +59,8 @@ public class ScriptOutput : MonoBehaviour
     private void Update()
     {
 
-        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf && !isButtonClicked
-            && loadScreen.gameObject.activeSelf)
+        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && !logBtn.gameObject.activeSelf && !isButtonClicked
+            && !loadScreen.gameObject.activeSelf)
         {
 
             // 마우스 클릭 감지
