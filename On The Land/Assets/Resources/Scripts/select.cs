@@ -9,64 +9,89 @@ public class select : MonoBehaviour
 
     bool[] saveFile = new bool[4]; // 세이브 파일이 있는지 여부를 저장하는 배열
 
+    public GameObject popUpScreen;
+    public Button saveButton;
+    public Button loadButton;
+    public Button deleteButton;
+    
     void Start()
+    {
+        popUpScreen.SetActive(false);
+        InitializeSlots();
+    }
+
+    // 각 슬롯 초기화
+    void InitializeSlots()  
     {
         for (int i = 0; i < 4; i++)
         {
-            // 모두 삭제할 생각이면 해당 코드 주석 풀기
-            // PlayerPrefs.DeleteAll();
-
-            int slotIndex = i; // Corrected closure issue
+            int slotIndex = i;
             slots[i].onClick.AddListener(() => OnSlotClicked(slotIndex));
-            
 
-            if (PlayerPrefs.HasKey($"Slot{i}"))  // 데이터가 있는 경우
+            // 저장된 데이터가 있는 경우 표시
+            if (PlayerPrefs.HasKey($"Slot{i}"))
             {
-                saveFile[i] = true; // 해당 슬롯을 true로 설정
-
-                // 슬롯의 데이터를 로드합니다.
+                saveFile[i] = true;
                 string savedData = PlayerPrefs.GetString($"Slot{i}");
                 string[] dataParts = savedData.Split('|');
-
-                // 버튼에 씬 번호를 표시합니다.
                 slots[i].GetComponentInChildren<Text>().text = dataParts[0];
-                
-                
             }
-            else  // 데이터가 없는 경우
+            else
             {
                 slots[i].GetComponentInChildren<Text>().text = "비어있음";
             }
         }
-
     }
 
-
-    private void OnSlotClicked(int slotIndex) // Corrected method signature
+    // 슬롯 클릭 이벤트 처리
+    private void OnSlotClicked(int slotIndex)
     {
-        //좌클릭 & 데이터가 있는 경우에만 load -> 인데 왜 더블클릭만 인식될까요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-        if (Input.GetMouseButtonDown(0) && slots[slotIndex].GetComponentInChildren<Text>().text != "비어있음")
+        // 슬롯이 비어있지 않은 경우
+        if (slots[slotIndex].GetComponentInChildren<Text>().text != "비어있음")
         {
-            Debug.Log("hi");
-            SceneManager.LoadScene(slots[slotIndex].GetComponentInChildren<Text>().text); // Corrected scene loading
+            popUpScreen.SetActive(true); // 팝업 화면을 활성화합니다.
+
+            // 저장 버튼 클릭 시 동작
+            saveButton.onClick.RemoveAllListeners(); // 기존 리스너 제거
+            saveButton.onClick.AddListener(() =>
+            {
+                Save(slotIndex);
+                popUpScreen.SetActive(false);
+            });
+
+            // 로드 버튼 클릭 시 동작
+            loadButton.onClick.RemoveAllListeners(); // 기존 리스너 제거
+            loadButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene(slots[slotIndex].GetComponentInChildren<Text>().text);
+            });
+
+            // 삭제 버튼 클릭 시 동작
+            deleteButton.onClick.RemoveAllListeners(); // 기존 리스너 제거
+            deleteButton.onClick.AddListener(() =>
+            {
+                PlayerPrefs.DeleteKey($"Slot{slotIndex}");
+                PlayerPrefs.Save();
+                slots[slotIndex].GetComponentInChildren<Text>().text = "비어있음";
+                popUpScreen.SetActive(false);
+            });
         }
         else
         {
-            // 현재 씬의 이름을 가져옵니다.
-            string currentSceneName = SceneManager.GetActiveScene().name;
-
-            // 현재 시간을 가져와 문자열로 변환합니다.
-            string currentTime = DateTime.Now.ToString();
-
-            // PlayerPrefs에 "Slot{i}" 키를 사용하여 현재 씬 이름과 현재 시간을 저장합니다.
-            PlayerPrefs.SetString($"Slot{slotIndex}", $"{currentSceneName}|{currentTime}");
-
-            // 변경 사항을 저장합니다.
-            PlayerPrefs.Save();
-
-            slots[slotIndex].GetComponentInChildren<Text>().text = currentSceneName;
+            Save(slotIndex);
         }
-
     }
 
+    // 현재 씬 정보를 해당 슬롯에 저장
+    private void Save(int slotIndex)
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        string currentTime = DateTime.Now.ToString();
+        if (currentSceneName != "4. MAIN")
+        {
+            PlayerPrefs.SetString($"Slot{slotIndex}", $"{currentSceneName}|{currentTime}");
+            PlayerPrefs.Save();
+            slots[slotIndex].GetComponentInChildren<Text>().text = currentSceneName;
+        }
+    }
 }

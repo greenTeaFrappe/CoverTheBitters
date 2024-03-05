@@ -13,6 +13,7 @@ public class ScriptOutput : MonoBehaviour
     public ScrollRect scrollRect;
 
     public Button autoBtn;
+    public Text autoBtnText; // 자동진행 버튼의 텍스트를 변경하기 위한 변수 추가
 
     public GameObject loadScreen;
 
@@ -26,16 +27,25 @@ public class ScriptOutput : MonoBehaviour
 
     public bool isButtonClicked = false;
 
-    public string currentStorySceneNumber;
-
     public int count=0;
-   
+
     //자동진행
     private void autoBtnClick()
     {
-        InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
-        isButtonClicked = !isButtonClicked;
+        isButtonClicked = !isButtonClicked; // 자동 진행 상태를 토글합니다.
+
+        if (isButtonClicked)
+        {
+            autoBtnText.text = "일시정지"; // 버튼 텍스트를 "일시정지"로 변경합니다.
+            InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
+        }
+        else
+        {
+            autoBtnText.text = "자동진행"; // 버튼 텍스트를 "자동진행"으로 변경합니다.
+            CancelInvoke(nameof(HandleMouseClick));
+        }
     }
+
 
     private void Start()
     {
@@ -48,9 +58,11 @@ public class ScriptOutput : MonoBehaviour
     //클릭 시 다음 대사로
     private void Update()
     {
-        if(!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf&& logBtn.gameObject.activeSelf && !isButtonClicked
-            &&!loadScreen.gameObject.activeSelf)
+
+        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf && !isButtonClicked
+            && loadScreen.gameObject.activeSelf)
         {
+
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
             {
