@@ -17,6 +17,8 @@ public class ScriptOutput : MonoBehaviour
 
     public GameObject loadScreen;
 
+    public Button skipBtn;
+
     // 배열 변수 선언
     public string[] texts;
     public int[] facialExpressions;
@@ -53,6 +55,7 @@ public class ScriptOutput : MonoBehaviour
         setB.gameObject.SetActive(false);
 
         autoBtn.onClick.AddListener(autoBtnClick);
+        skipBtn.onClick.AddListener(skipBtnClick);
     }
 
     //클릭 시 다음 대사로
@@ -92,4 +95,9 @@ public class ScriptOutput : MonoBehaviour
         }
     }
 
+    private void skipBtnClick()
+    {
+        count = texts.Length;
+        
+    }
 }
