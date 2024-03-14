@@ -54,6 +54,14 @@ public class ScriptOutput : MonoBehaviour
         setA.gameObject.SetActive(false);
         setB.gameObject.SetActive(false);
 
+        nameText.text = names[count];
+        scripts.text = texts[count];
+
+        //state 패턴 적용해야함
+        ScriptOutputState state = GetComponent<ScriptOutputState>();
+        state.SOState(facialExpressions[count], names[count]);
+        count++;
+
         autoBtn.onClick.AddListener(autoBtnClick);
         skipBtn.onClick.AddListener(skipBtnClick);
     }
@@ -61,10 +69,7 @@ public class ScriptOutput : MonoBehaviour
     //클릭 시 다음 대사로
     private void Update()
     {
-        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf 
-            && logBtn.gameObject.activeSelf && !isButtonClicked
-
-            && !loadScreen.gameObject.activeSelf)
+        if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf && !isButtonClicked && !loadScreen.gameObject.activeSelf)
         {
 
             // 마우스 클릭 감지
