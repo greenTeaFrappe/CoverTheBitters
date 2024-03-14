@@ -13,11 +13,13 @@ public class ScriptOutput : MonoBehaviour
     public ScrollRect scrollRect;
 
     public Button autoBtn;
-    public Text autoBtnText; // ÀÚµ¿ÁøÇà ¹öÆ°ÀÇ ÅØ½ºÆ®¸¦ º¯°æÇÏ±â À§ÇÑ º¯¼ö Ãß°¡
+    public Text autoBtnText; // ìë™ì§„í–‰ ë²„íŠ¼ì˜ í…ìŠ¤íŠ¸ë¥¼ ë³€ê²½í•˜ê¸° ìœ„í•œ ë³€ìˆ˜ ì¶”ê°€
 
     public GameObject loadScreen;
 
-    // ¹è¿­ º¯¼ö ¼±¾ğ
+    public Button skipBtn;
+
+    // ë°°ì—´ ë³€ìˆ˜ ì„ ì–¸
     public string[] texts;
     public int[] facialExpressions;
     public string[] names;
@@ -29,19 +31,19 @@ public class ScriptOutput : MonoBehaviour
 
     public int count=0;
 
-    //ÀÚµ¿ÁøÇà
+    //ìë™ì§„í–‰
     private void autoBtnClick()
     {
-        isButtonClicked = !isButtonClicked; // ÀÚµ¿ ÁøÇà »óÅÂ¸¦ Åä±ÛÇÕ´Ï´Ù.
+        isButtonClicked = !isButtonClicked; // ìë™ ì§„í–‰ ìƒíƒœë¥¼ í† ê¸€í•©ë‹ˆë‹¤.
 
         if (isButtonClicked)
         {
-            autoBtnText.text = "ÀÏ½ÃÁ¤Áö"; // ¹öÆ° ÅØ½ºÆ®¸¦ "ÀÏ½ÃÁ¤Áö"·Î º¯°æÇÕ´Ï´Ù.
+            autoBtnText.text = "ì¼ì‹œì •ì§€"; // ë²„íŠ¼ í…ìŠ¤íŠ¸ë¥¼ "ì¼ì‹œì •ì§€"ë¡œ ë³€ê²½í•©ë‹ˆë‹¤.
             InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
         }
         else
         {
-            autoBtnText.text = "ÀÚµ¿ÁøÇà"; // ¹öÆ° ÅØ½ºÆ®¸¦ "ÀÚµ¿ÁøÇà"À¸·Î º¯°æÇÕ´Ï´Ù.
+            autoBtnText.text = "ìë™ì§„í–‰"; // ë²„íŠ¼ í…ìŠ¤íŠ¸ë¥¼ "ìë™ì§„í–‰"ìœ¼ë¡œ ë³€ê²½í•©ë‹ˆë‹¤.
             CancelInvoke(nameof(HandleMouseClick));
         }
     }
@@ -53,21 +55,23 @@ public class ScriptOutput : MonoBehaviour
         setB.gameObject.SetActive(false);
 
         autoBtn.onClick.AddListener(autoBtnClick);
+        skipBtn.onClick.AddListener(skipBtnClick);
     }
 
-    //Å¬¸¯ ½Ã ´ÙÀ½ ´ë»ç·Î
+    //í´ë¦­ ì‹œ ë‹¤ìŒ ëŒ€ì‚¬ë¡œ
     private void Update()
     {
         if (!scrollRect.gameObject.activeSelf && !backBtn.gameObject.activeSelf 
             && logBtn.gameObject.activeSelf && !isButtonClicked
+
             && !loadScreen.gameObject.activeSelf)
         {
 
-            // ¸¶¿ì½º Å¬¸¯ °¨Áö
+            // ë§ˆìš°ìŠ¤ í´ë¦­ ê°ì§€
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
             {
                 HandleMouseClick();
-                    //Å¬¸¯ Ã³¸®
+                    //í´ë¦­ ì²˜ë¦¬
             }
         }
     }
@@ -79,7 +83,7 @@ public class ScriptOutput : MonoBehaviour
             nameText.text = names[count];
             scripts.text = texts[count];
 
-            //state ÆĞÅÏ Àû¿ëÇØ¾ßÇÔ
+            //state íŒ¨í„´ ì ìš©í•´ì•¼í•¨
             ScriptOutputState state = GetComponent<ScriptOutputState>();
             state.SOState(facialExpressions[count], names[count]);
             count++;
@@ -91,4 +95,9 @@ public class ScriptOutput : MonoBehaviour
         }
     }
 
+    private void skipBtnClick()
+    {
+        count = texts.Length;
+        
+    }
 }
