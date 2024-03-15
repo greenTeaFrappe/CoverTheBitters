@@ -51,6 +51,7 @@ public class ScriptOutput : MonoBehaviour
 
     private void Start()
     {
+       
         setA.gameObject.SetActive(false);
         setB.gameObject.SetActive(false);
 
@@ -64,6 +65,7 @@ public class ScriptOutput : MonoBehaviour
 
         autoBtn.onClick.AddListener(autoBtnClick);
         skipBtn.onClick.AddListener(skipBtnClick);
+
     }
 
     //클릭 시 다음 대사로
@@ -75,6 +77,7 @@ public class ScriptOutput : MonoBehaviour
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
             {
+
                 HandleMouseClick();
                     //클릭 처리
             }
@@ -103,6 +106,7 @@ public class ScriptOutput : MonoBehaviour
     private void skipBtnClick()
     {
         count = texts.Length;
-        
+        HandleMouseClick();
+
     }
 }
