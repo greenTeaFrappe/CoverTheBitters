@@ -27,12 +27,10 @@ public class ScriptOutput : MonoBehaviour
     public Text nameText;
     public Text scripts;
 
-    public bool isButtonClicked = false;
+    private bool isButtonClicked = false;
 
     public int count=0;
 
-    private float timer = 0f;
-    private float interval = 1f; // 1초 간격
 
     //자동진행
     private void autoBtnClick()
