@@ -2,37 +2,63 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+//using static System.Net.Mime.MediaTypeNames;
 
 public class noneBtnScriptOutput : MonoBehaviour
 {
-    // 배열 변수 선언
-    public string[] texts;
-    public int[] facialExpressions;
-    public string[] names;
-
     public Button logBtn;
     public Button backBtn;
     public ScrollRect scrollRect;
 
     public Button autoBtn;
+    public Text autoBtnText;
+
+    public GameObject loadScreen;
+
+    public Button skipBtn;
+
+    // 배열 변수 선언
+    public string[] texts;
+    public int[] facialExpressions;
+    public string[] names;
 
     public Text nameText;
     public Text scripts;
 
-    private int count=0;
-
     public string nextSceneName;
+
     public bool isButtonClicked = false;
+
+    private int count=0;
 
     private void autoBtnClick()
     {
-        InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
-        isButtonClicked = !isButtonClicked;
+        isButtonClicked = !isButtonClicked; // 자동 진행 상태를 토글합니다.
+
+        if (isButtonClicked)
+        {
+            autoBtnText.text = "일시정지"; // 버튼 텍스트를 "일시정지"로 변경합니다.
+            InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
+        }
+        else
+        {
+            autoBtnText.text = "자동진행"; // 버튼 텍스트를 "자동진행"으로 변경합니다.
+            CancelInvoke(nameof(HandleMouseClick));
+        }
     }
 
     private void Start()
     {
+        nameText.text = names[count];
+        scripts.text = texts[count];
+
+        //state 패턴 적용해야함
+        ScriptOutputState state = GetComponent<ScriptOutputState>();
+        state.SOState(facialExpressions[count], names[count]);
+        count++;
+
         autoBtn.onClick.AddListener(autoBtnClick);
+        skipBtn.onClick.AddListener(skipBtnClick);
     }
 
     private void Update()
@@ -85,4 +111,9 @@ public class noneBtnScriptOutput : MonoBehaviour
         }
     }
 
+    private void skipBtnClick()
+    {
+        count = texts.Length;
+
+    }
 }
