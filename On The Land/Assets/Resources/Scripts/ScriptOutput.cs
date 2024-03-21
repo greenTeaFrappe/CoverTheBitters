@@ -31,11 +31,14 @@ public class ScriptOutput : MonoBehaviour
 
     public int count=0;
 
+    private float timer = 0f;
+    private float interval = 1f; // 1초 간격
+
     //자동진행
     private void autoBtnClick()
     {
         isButtonClicked = !isButtonClicked; // 자동 진행 상태를 토글합니다.
-
+        //error : save와 log 버튼 클릭해도 자동진행이 됨
         if (isButtonClicked)
         {
             autoBtnText.text = "일시정지"; // 버튼 텍스트를 "일시정지"로 변경합니다.
@@ -46,6 +49,7 @@ public class ScriptOutput : MonoBehaviour
             autoBtnText.text = "자동진행"; // 버튼 텍스트를 "자동진행"으로 변경합니다.
             CancelInvoke(nameof(HandleMouseClick));
         }
+
     }
 
 
@@ -64,7 +68,11 @@ public class ScriptOutput : MonoBehaviour
         count++;
 
         autoBtn.onClick.AddListener(autoBtnClick);
-        skipBtn.onClick.AddListener(skipBtnClick);
+        skipBtn.onClick.AddListener(() =>
+        {
+            count = texts.Length;
+            HandleMouseClick();
+        });
 
     }
 
@@ -103,10 +111,4 @@ public class ScriptOutput : MonoBehaviour
         }
     }
 
-    private void skipBtnClick()
-    {
-        count = texts.Length;
-        HandleMouseClick();
-
-    }
 }
