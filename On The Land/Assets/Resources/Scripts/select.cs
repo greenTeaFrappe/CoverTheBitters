@@ -38,7 +38,7 @@ public class select : MonoBehaviour
             }
             else
             {
-                slots[i].GetComponentInChildren<Text>().text = "SLOT "+i;
+                slots[i].GetComponentInChildren<Text>().text = "비어있음" ;
             }
         }
     }
