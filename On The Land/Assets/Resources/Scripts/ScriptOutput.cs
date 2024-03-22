@@ -16,6 +16,7 @@ public class ScriptOutput : MonoBehaviour
     public Text autoBtnText; // 자동진행 버튼의 텍스트를 변경하기 위한 변수 추가
 
     public GameObject loadScreen;
+    public GameObject saveImgCav;
 
     public Button skipBtn;
 
@@ -56,7 +57,7 @@ public class ScriptOutput : MonoBehaviour
        
         setA.gameObject.SetActive(false);
         setB.gameObject.SetActive(false);
-
+        saveImgCav.gameObject.SetActive(false);
         nameText.text = names[count];
         scripts.text = texts[count];
 
@@ -97,13 +98,18 @@ public class ScriptOutput : MonoBehaviour
             nameText.text = names[count];
             scripts.text = texts[count];
 
-            //state 패턴 적용해야함
+            //state 패턴 적용
             ScriptOutputState state = GetComponent<ScriptOutputState>();
             state.SOState(facialExpressions[count], names[count]);
 
             if(count==3)
             {
                 Debug.Log("이벤트가 발생했습니다.");
+                saveImgCav.gameObject.SetActive(true);
+            }
+            else
+            {
+                saveImgCav.gameObject.SetActive(false);
             }
 
             count++;
