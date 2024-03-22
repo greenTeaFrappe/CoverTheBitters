@@ -16,6 +16,7 @@ public class ScriptOutput : MonoBehaviour
     public Text autoBtnText; // 자동진행 버튼의 텍스트를 변경하기 위한 변수 추가
 
     public GameObject loadScreen;
+    public GameObject saveImgCav;
 
     public Button skipBtn;
 
@@ -27,25 +28,27 @@ public class ScriptOutput : MonoBehaviour
     public Text nameText;
     public Text scripts;
 
-    public bool isButtonClicked = false;
+    private bool isButtonClicked = false;
 
     public int count=0;
+
 
     //자동진행
     private void autoBtnClick()
     {
         isButtonClicked = !isButtonClicked; // 자동 진행 상태를 토글합니다.
-
+        //error : save와 log 버튼 클릭해도 자동진행이 됨
         if (isButtonClicked)
         {
-            autoBtnText.text = "일시정지"; // 버튼 텍스트를 "일시정지"로 변경합니다.
+            autoBtnText.text = "STOP"; // 버튼 텍스트를 "일시정지"로 변경합니다.
             InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
         }
         else
         {
-            autoBtnText.text = "자동진행"; // 버튼 텍스트를 "자동진행"으로 변경합니다.
+            autoBtnText.text = "AUTO"; // 버튼 텍스트를 "자동진행"으로 변경합니다.
             CancelInvoke(nameof(HandleMouseClick));
         }
+
     }
 
 
@@ -54,17 +57,21 @@ public class ScriptOutput : MonoBehaviour
        
         setA.gameObject.SetActive(false);
         setB.gameObject.SetActive(false);
-
+        saveImgCav.gameObject.SetActive(false);
         nameText.text = names[count];
         scripts.text = texts[count];
 
-        //state 패턴 적용해야함
+        //state 패턴 적용
         ScriptOutputState state = GetComponent<ScriptOutputState>();
         state.SOState(facialExpressions[count], names[count]);
         count++;
 
         autoBtn.onClick.AddListener(autoBtnClick);
-        skipBtn.onClick.AddListener(skipBtnClick);
+        skipBtn.onClick.AddListener(() =>
+        {
+            count = texts.Length;
+            HandleMouseClick();
+        });
 
     }
 
@@ -91,9 +98,20 @@ public class ScriptOutput : MonoBehaviour
             nameText.text = names[count];
             scripts.text = texts[count];
 
-            //state 패턴 적용해야함
+            //state 패턴 적용
             ScriptOutputState state = GetComponent<ScriptOutputState>();
             state.SOState(facialExpressions[count], names[count]);
+
+            if(count==3)
+            {
+                Debug.Log("이벤트가 발생했습니다.");
+                saveImgCav.gameObject.SetActive(true);
+            }
+            else
+            {
+                saveImgCav.gameObject.SetActive(false);
+            }
+
             count++;
         }
         else
@@ -103,10 +121,4 @@ public class ScriptOutput : MonoBehaviour
         }
     }
 
-    private void skipBtnClick()
-    {
-        count = texts.Length;
-        HandleMouseClick();
-
-    }
 }
