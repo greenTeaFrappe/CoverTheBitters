@@ -9,8 +9,8 @@ public class albumSelect : MonoBehaviour
     public Button SAChangeBtn;
     public GameObject EAScreen;
     public GameObject SAScreen;
-    private isEABtnClicked = false;
-    private isSABtnClicked = false;
+
+
     void Start()
     {
         EAScreen.SetActive(true);
@@ -19,31 +19,18 @@ public class albumSelect : MonoBehaviour
         Button SAbtn = SAChangeBtn.GetComponent<Button>();
         Eabtn.onClick.AddListener(() =>
         {
-            isEABtnClicked = !isEABtnClicked;
-            if (isEABtnClicked)
-            {
-                EAScreen.SetActive(false);
-            }
-            else
-            {
-                EAScreen.SetActive(false);
-            }
+            SAScreen.SetActive(false);
+            EAScreen.SetActive(true);
+
         });
 
         SAbtn.onClick.AddListener(() =>
         {
-            isSABtnClicked = !isSABtnClicked;
-            if (isSABtnClicked)
-            {
+            EAScreen.SetActive(false);
+            SAScreen.SetActive(true);
 
-            }
-            else
-            {
 
-            }
-            
-
-        })
+        });
     }
 
 

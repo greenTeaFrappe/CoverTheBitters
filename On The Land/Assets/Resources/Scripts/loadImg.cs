@@ -1,8 +1,8 @@
-using UnityEngine;
+ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class selectImg : MonoBehaviour
+public class loadImg : MonoBehaviour
 {
     public Image[] imageSlots; // 이미지를 표시할 UI 이미지 배열
     public Sprite defaultImage; // 기본 이미지

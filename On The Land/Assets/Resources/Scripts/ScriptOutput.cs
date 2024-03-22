@@ -39,12 +39,12 @@ public class ScriptOutput : MonoBehaviour
         //error : save와 log 버튼 클릭해도 자동진행이 됨
         if (isButtonClicked)
         {
-            autoBtnText.text = "일시정지"; // 버튼 텍스트를 "일시정지"로 변경합니다.
+            autoBtnText.text = "STOP"; // 버튼 텍스트를 "일시정지"로 변경합니다.
             InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
         }
         else
         {
-            autoBtnText.text = "자동진행"; // 버튼 텍스트를 "자동진행"으로 변경합니다.
+            autoBtnText.text = "AUTO"; // 버튼 텍스트를 "자동진행"으로 변경합니다.
             CancelInvoke(nameof(HandleMouseClick));
         }
 
@@ -60,7 +60,7 @@ public class ScriptOutput : MonoBehaviour
         nameText.text = names[count];
         scripts.text = texts[count];
 
-        //state 패턴 적용해야함
+        //state 패턴 적용
         ScriptOutputState state = GetComponent<ScriptOutputState>();
         state.SOState(facialExpressions[count], names[count]);
         count++;
@@ -100,6 +100,12 @@ public class ScriptOutput : MonoBehaviour
             //state 패턴 적용해야함
             ScriptOutputState state = GetComponent<ScriptOutputState>();
             state.SOState(facialExpressions[count], names[count]);
+
+            if(count==3)
+            {
+                Debug.Log("이벤트가 발생했습니다.");
+            }
+
             count++;
         }
         else
