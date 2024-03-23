@@ -21,7 +21,6 @@ public class albumSelect : MonoBehaviour
         {
             SAScreen.SetActive(false);
             EAScreen.SetActive(true);
-
         });
 
         SAbtn.onClick.AddListener(() =>

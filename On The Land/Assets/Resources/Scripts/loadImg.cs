@@ -1,4 +1,4 @@
- using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -15,6 +15,7 @@ public class loadImg : MonoBehaviour
         DisplayCollectedImages();
     }
 
+    // 저장된 이미지 로드
     void LoadCollectedImages()
     {
         for (int i = 0; i < imageSlots.Length; i++)
@@ -52,4 +53,6 @@ public class loadImg : MonoBehaviour
             }
         }
     }
+
+
 }
