@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
 public class ScriptOutput : MonoBehaviour
 {
     public Button setA;
@@ -23,6 +24,7 @@ public class ScriptOutput : MonoBehaviour
     public GameObject saveImgCav;
     private const string EAIMG_KEY = "EAIMG"; // EAIMG 이미지를 저장할 플레이어 프레프스 키
     private const string SAIMG_KEY = "SAIMG"; // SAIMG 이미지를 저장할 플레이어 프레프스 키
+    
 
     public Button skipBtn;
 
@@ -93,12 +95,10 @@ public class ScriptOutput : MonoBehaviour
 
             if (count == 3)
             {
-                Debug.Log("이벤트가 발생했습니다.");
-
                 saveImgCav.gameObject.SetActive(true);
 
-                Image imageToCollect = GameObject.Find("saveImgCav").GetComponentInChildren<Image>(); // 수집할 이미지를 보유하는 UI 요소에 대한 참조
-                collectAndSaveImg(imageToCollect, EAIMG_KEY);
+                RawImage imageToCollect = GameObject.Find("saveImgCav").GetComponentInChildren<RawImage>(); // 수집할 이미지를 보유하는 UI 요소에 대한 참조
+                collectAndSaveImg(imageToCollect,0, EAIMG_KEY);
 
             }
             else
@@ -149,56 +149,42 @@ public class ScriptOutput : MonoBehaviour
         }
     }
 
-
-
-
-    public void collectAndSaveImg(Image image, string eventType)
+    public void collectAndSaveImg(RawImage rawImage, int index, string eventType)
     {
-        // collectButton의 이미지를 Texture2D로 변환
-        Texture2D imageTexture = TextureFromImage(image);
-        Debug.Log("이벤트가 실행되었습니다.");
-        if (imageTexture != null)
+        // RawImage의 텍스처를 가져옴
+        Texture2D sourceTexture = TextureFromRawImage(rawImage);
+
+        if (sourceTexture != null)
         {
             // 이미지를 Base64로 인코딩하여 문자열로 변환
-            byte[] bytes = imageTexture.EncodeToPNG();
+            byte[] bytes = sourceTexture.EncodeToPNG();
             string base64EncodedImage = System.Convert.ToBase64String(bytes);
 
-            // 이벤트 타입에 따라 플레이어 프레프스에 저장
-            switch (eventType)
-            {
-                case "EAIMG":
-                    PlayerPrefs.SetString("EAIMG_KEY", base64EncodedImage);
-                    break;
-                case "SAIMG":
-                    PlayerPrefs.SetString("SAIMG_KEY", base64EncodedImage);
-                    break;
-                default:
-                    Debug.LogError("Unknown event type: " + eventType);
-                    return;
-            }
+            // 이벤트 타입과 인덱스에 따라 플레이어 프레프스에 저장
+            string key = eventType + "_" + index;
+            PlayerPrefs.SetString(key, base64EncodedImage);
 
             // 변경된 내용을 저장
             PlayerPrefs.Save();
-            Debug.Log("저장되었습니다.");
-        }
 
-        Debug.Log("저장되지 않았습니다.");
+            // 저장된 내용을 로그에 출력
+            Debug.Log("이벤트가 실행되었습니다. 소스 이미지를 성공적으로 저장했습니다. (인덱스: " + index + ")");
+        }
     }
 
-    // Image의 텍스처를 가져와서 Texture2D로 변환하는 함수
-    private Texture2D TextureFromImage(Image image)
+    // RawImage의 텍스처를 가져와서 Texture2D로 변환하는 함수
+    private Texture2D TextureFromRawImage(RawImage rawImage)
     {
-        Texture2D texture = null;
-        if (image != null && image.mainTexture != null)
+        if (rawImage != null && rawImage.texture != null)
         {
-            texture = new Texture2D(image.mainTexture.width, image.mainTexture.height);
-            RenderTexture currentRT = RenderTexture.active;
-            RenderTexture.active = (RenderTexture)image.mainTexture; //여기서 에러가 나ㅠㅠ 아오 시발~~!!
-            texture.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
-            texture.Apply();
-            RenderTexture.active = currentRT;
+            // RawImage의 Texture를 가져옴
+            Texture2D texture = rawImage.texture as Texture2D;
+            return texture;
         }
-        return texture;
-
+        else
+        {
+            Debug.LogError("RawImage 컴포넌트 또는 그 텍스처가 없습니다.");
+            return null;
+        }
     }
 }
