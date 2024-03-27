@@ -7,7 +7,7 @@ public class select : MonoBehaviour
 {
     public Button[] slots;     // Corrected variable name
 
-    bool[] saveFile = new bool[6]; // 세이브 파일이 있는지 여부를 저장하는 배열
+    bool[] saveFile = new bool[5]; // 세이브 파일이 있는지 여부를 저장하는 배열
 
     public GameObject popUpScreen;
     public Button saveButton;
@@ -23,7 +23,7 @@ public class select : MonoBehaviour
     // 각 슬롯 초기화
     void InitializeSlots()  
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < saveFile.Length; i++)
         {
             int slotIndex = i;
             slots[i].onClick.AddListener(() => OnSlotClicked(slotIndex));
