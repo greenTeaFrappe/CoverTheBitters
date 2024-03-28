@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 using UnityEngine.SceneManagement;
 using System;
 
@@ -7,7 +8,7 @@ public class select : MonoBehaviour
 {
     public Button[] slots;     // Corrected variable name
 
-    bool[] saveFile = new bool[6]; // 세이브 파일이 있는지 여부를 저장하는 배열
+    bool[] saveFile = new bool[5]; // 세이브 파일이 있는지 여부를 저장하는 배열
 
     public GameObject popUpScreen;
     public Button saveButton;
@@ -20,13 +21,20 @@ public class select : MonoBehaviour
         InitializeSlots();
     }
 
+
     // 각 슬롯 초기화
     void InitializeSlots()  
     {
-        for (int i = 0; i < 6; i++)
+        
+        for (int i = 0; i < 5; i++)
         {
-            int slotIndex = i;
-            slots[i].onClick.AddListener(() => OnSlotClicked(slotIndex));
+            UnityEngine.Debug.Log(saveFile[i]);
+            int slotIndex = i; // 각 반복에서 새로운 변수를 생성하여 클로저 변수로 사용
+            slots[slotIndex].onClick.AddListener(() =>
+            {
+                UnityEngine.Debug.Log("slot add listener"); // Specify UnityEngine namespace
+                OnSlotClicked(slotIndex);
+            });
 
             // 저장된 데이터가 있는 경우 표시
             if (PlayerPrefs.HasKey($"Slot{i}"))
@@ -44,7 +52,7 @@ public class select : MonoBehaviour
     }
 
     // 슬롯 클릭 이벤트 처리
-    private void OnSlotClicked(int slotIndex)
+    public void OnSlotClicked(int slotIndex)
     {
         // 슬롯이 비어있지 않은 경우
         if (slots[slotIndex].GetComponentInChildren<Text>().text != "비어있음")
