@@ -30,6 +30,7 @@ public class ScriptOutput : MonoBehaviour
     public int count = 0;
     public Text nameText;
     public Text scripts;
+    public float speed;
 
     private bool isButtonClicked = false;
 
@@ -109,7 +110,6 @@ public class ScriptOutput : MonoBehaviour
     
         if (isButtonClicked)
         {
-    
             autoBtnText.text = "STOP"; // 버튼 텍스트를 "일시정지"로 변경합니다.
     
             skipBtn.gameObject.SetActive(false);
@@ -119,12 +119,14 @@ public class ScriptOutput : MonoBehaviour
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
             {
-    
+            
                 autoBtnClick();
                 --count;
             }
-    
-            InvokeRepeating(nameof(HandleMouseClick), 0f, 1f);
+
+            speedOption sp = GetComponent<speedOption>();
+            speed = sp.GetCurrentSpeed();
+            InvokeRepeating(nameof(HandleMouseClick), 0f, 1f*speed);
         }
         else
         {
@@ -135,5 +137,5 @@ public class ScriptOutput : MonoBehaviour
             CancelInvoke(nameof(HandleMouseClick));
         }
     }
-
+    
 }
