@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 23382911}
   - component: {fileID: 23382914}
   - component: {fileID: 23382915}
+  - component: {fileID: 23382916}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -408,7 +409,6 @@ MonoBehaviour:
   loadScreen: {fileID: 611961809}
   loadBtn: {fileID: 1067812121}
   loadBackBtn: {fileID: 609743525}
-  saveImgCav: {fileID: 1521101649}
   skipBtn: {fileID: 1408585610}
   texts:
   - text1
@@ -531,6 +531,19 @@ MonoBehaviour:
   loadScreen: {fileID: 611961809}
   loadBtn: {fileID: 1067812121}
   loadBackBtn: {fileID: 609743525}
+--- !u!114 &23382916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23382902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a108de73b192a6541b9a8455dfad334c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveImgCav: {fileID: 1521101649}
 --- !u!1 &29252281
 GameObject:
   m_ObjectHideFlags: 0

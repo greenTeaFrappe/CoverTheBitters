@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class quiteScript : MonoBehaviour
+public class quitScript : MonoBehaviour
 {
     public Button quitBtn;
 
