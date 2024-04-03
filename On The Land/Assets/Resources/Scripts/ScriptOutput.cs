@@ -33,6 +33,9 @@ public class ScriptOutput : MonoBehaviour
     public float speed;
 
     private bool isButtonClicked = false;
+    private Coroutine autoCoroutine;
+
+    public GameObject nameScreen;
 
     private void Start()
     {
@@ -59,12 +62,13 @@ public class ScriptOutput : MonoBehaviour
             });
         });
 
+        nameScreen.gameObject.SetActive(false);
     }
 
     //클릭 시 다음 대사로
     private void Update()
     {
-        if (!scrollRect.gameObject.activeSelf && !logbackBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf && !isButtonClicked && !loadScreen.gameObject.activeSelf)
+        if (!scrollRect.gameObject.activeSelf && !logbackBtn.gameObject.activeSelf && logBtn.gameObject.activeSelf && !isButtonClicked && !loadScreen.gameObject.activeSelf&&!nameScreen.gameObject.activeSelf)
         {
 
             // 마우스 클릭 감지
@@ -94,6 +98,10 @@ public class ScriptOutput : MonoBehaviour
                 CollectAndSaveImg cs = GetComponent<CollectAndSaveImg>();
                 cs.HandleMouseClick();
             }
+            if (count == 4)
+            {
+                nameScreen.gameObject.SetActive(true);
+            }
             count++;
         }
         else
@@ -119,14 +127,11 @@ public class ScriptOutput : MonoBehaviour
             // 마우스 클릭 감지
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space"))
             {
-            
                 autoBtnClick();
                 --count;
             }
 
-            speedOption sp = GetComponent<speedOption>();
-            speed = sp.GetCurrentSpeed();
-            InvokeRepeating(nameof(HandleMouseClick), 0f, 1f*speed);
+            autoCoroutine = StartCoroutine(AutoModeRoutine());
         }
         else
         {
@@ -134,8 +139,16 @@ public class ScriptOutput : MonoBehaviour
             logBtn.gameObject.SetActive(true);
             loadBtn.gameObject.SetActive(true);
             autoBtnText.text = "AUTO"; // 버튼 텍스트를 "자동진행"으로 변경합니다.
-            CancelInvoke(nameof(HandleMouseClick));
+            if (autoCoroutine != null)
+                StopCoroutine(autoCoroutine);
         }
     }
-    
+    private IEnumerator AutoModeRoutine()
+    {
+        while (count < texts.Length)
+        {
+            HandleMouseClick();
+            yield return new WaitForSeconds(0.5f * (speed + 1));
+        }
+    }
 }
