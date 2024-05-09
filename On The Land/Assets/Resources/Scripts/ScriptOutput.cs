@@ -98,7 +98,7 @@ public class ScriptOutput : MonoBehaviour
                 CollectAndSaveImg cs = GetComponent<CollectAndSaveImg>();
                 cs.HandleMouseClick();
             }
-            if (count == 4)
+            if (count == 13)
             {
                 nameScreen.gameObject.SetActive(true);
             }
