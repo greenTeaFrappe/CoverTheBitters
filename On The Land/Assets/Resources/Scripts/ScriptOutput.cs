@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using System.Diagnostics;
 
 
@@ -93,12 +94,12 @@ public class ScriptOutput : MonoBehaviour
             state.SOState(facialExpressions[count], names[count]);
 
             
-            if (count == 3)
+            if (count == 333)
             {   
                 CollectAndSaveImg cs = GetComponent<CollectAndSaveImg>();
                 cs.HandleMouseClick();
             }
-            if (count == 13)
+            if (count == 1 && SceneManager.GetActiveScene().name == "4. DAY1-2a")
             {
                 nameScreen.gameObject.SetActive(true);
             }
