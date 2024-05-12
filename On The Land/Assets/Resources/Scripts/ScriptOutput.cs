@@ -2,13 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using System.Diagnostics;
 
 
 public class ScriptOutput : MonoBehaviour
 {
-    public Button setA;
-    public Button setB;
+    public Button[] btns;
 
     public Button logBtn;
     public Button logbackBtn;
@@ -27,6 +27,7 @@ public class ScriptOutput : MonoBehaviour
     public string[] texts;
     public int[] facialExpressions;
     public string[] names;
+
     public int count = 0;
     public Text nameText;
     public Text scripts;
@@ -39,8 +40,10 @@ public class ScriptOutput : MonoBehaviour
 
     private void Start()
     {
-        setA.gameObject.SetActive(false);
-        setB.gameObject.SetActive(false);
+        for(int i=0; i<btns.Length; i++)
+        {
+            btns[i].gameObject.SetActive(false);
+        }
 
         HandleMouseClick();
 
@@ -93,12 +96,12 @@ public class ScriptOutput : MonoBehaviour
             state.SOState(facialExpressions[count], names[count]);
 
             
-            if (count == 3)
+            if (count == 333)
             {   
                 CollectAndSaveImg cs = GetComponent<CollectAndSaveImg>();
                 cs.HandleMouseClick();
             }
-            if (count == 4)
+            if (count == 1 && SceneManager.GetActiveScene().name == "4. DAY1-2a")
             {
                 nameScreen.gameObject.SetActive(true);
             }
@@ -106,8 +109,10 @@ public class ScriptOutput : MonoBehaviour
         }
         else
         {
-            setA.gameObject.SetActive(true);
-            setB.gameObject.SetActive(true);
+            for (int i = 0; i < btns.Length; i++)
+            {
+                btns[i].gameObject.SetActive(true);
+            }
         }
     }
 
