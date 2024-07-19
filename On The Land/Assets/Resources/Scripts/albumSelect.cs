@@ -20,6 +20,7 @@ public class albumSelect : MonoBehaviour
 
     public Button[] stBtns;
     public Button[] edBtns;
+    public GameObject saveImgCav;
 
     void Start()
     {
@@ -29,14 +30,15 @@ public class albumSelect : MonoBehaviour
         Button SAbtn = SAChangeBtn.GetComponent<Button>();
         LoadCollectedImages();
         DisplayCollectedImages();
-        HandleMouseClick();
+        //HandleMouseClick();
+        saveImgCav.gameObject.SetActive(false);
 
         for (int i = 0; i <stBtns.Length; i++)
         {
            stBtns[i].gameObject.SetActive(false);
             stBtns[i].onClick.AddListener(() =>
            {
-               HandleMouseClick();
+               //STHandleMouseClick(i);
            });
         }
 
@@ -45,7 +47,7 @@ public class albumSelect : MonoBehaviour
             edBtns[i].gameObject.SetActive(true);
             edBtns[i].onClick.AddListener(() =>
             {
-                HandleMouseClick();
+                //EDHandleMouseClick(i);
             });
         }
 
@@ -136,9 +138,13 @@ public class albumSelect : MonoBehaviour
         }
     }
 
-    private void HandleMouseClick()
-    {
-        CollectAndSaveImg cs = GetComponent<CollectAndSaveImg>();
-        cs.HandleMouseClick();
-    }
+    //private void STHandleMouseClick(int i)
+    //{
+    //    
+    //}
+    //
+    //private void STHandleMouseClick(int i)
+    //{
+    //
+    //}
 }
