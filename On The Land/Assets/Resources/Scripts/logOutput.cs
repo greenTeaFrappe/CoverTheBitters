@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using static System.Net.Mime.MediaTypeNames;
+using TMPro;
 
 public class logOutput : MonoBehaviour
 {
@@ -16,6 +16,8 @@ public class logOutput : MonoBehaviour
     private ScriptOutput scriptOutput; // ScriptOutput 컴포넌트를 참조하기 위한 변수 추가
 
     public int logCount;
+    public int itemHeight = 100;
+
 
     private void Start()
     {
@@ -56,37 +58,44 @@ public class logOutput : MonoBehaviour
             {
                 GameObject chatItem = Instantiate(chatItemPrefab, content);
 
-                // 텍스트와 이미지 설정
-                UnityEngine.UI.Text chatText = chatItem.GetComponentInChildren<UnityEngine.UI.Text>();
-                UnityEngine.UI.Image chatImage = chatItem.GetComponentInChildren<UnityEngine.UI.Image>();
+                // 프리팹 내부의 logText와 chatImage 오브젝트 찾기
+                TextMeshProUGUI logText = chatItem.transform.Find("logText").GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI name = chatItem.transform.Find("name").GetComponent<TextMeshProUGUI>();
+                UnityEngine.UI.Image pfpImg = chatItem.transform.Find("pfpImg").GetComponent<UnityEngine.UI.Image>();
 
-                if (chatText != null)
+                if (logText != null && name != null)
                 {
-                    chatText.text = scriptOutput.names[i] + " : " + scriptOutput.texts[i];
+                    logText.text = scriptOutput.texts[i];
+                    name.text = scriptOutput.names[i];
                 }
 
-                if (chatImage != null)
+                if (pfpImg != null)
                 {
                     switch (scriptOutput.names[i])
                     {
                         case "안나": //피안화
-                            chatImage.sprite = scriptOutput.pfpImages[0];
+                            pfpImg.sprite = scriptOutput.pfpImages[0];
                             break;
                         case "아이작": //피이삭
-                            chatImage.sprite = scriptOutput.pfpImages[1];
+                            pfpImg.sprite = scriptOutput.pfpImages[1];
                             break;
                         case "아서": //하수호
-                            chatImage.sprite = scriptOutput.pfpImages[2];
+                            pfpImg.sprite = scriptOutput.pfpImages[2];
                             break;
                         case "양소미":
-                            chatImage.sprite = scriptOutput.pfpImages[3];
+                            pfpImg.sprite = scriptOutput.pfpImages[3];
                             break;
                         default: // 그 외 등장인물
-                            chatImage.sprite = scriptOutput.pfpImages[4];
+                            pfpImg.sprite = scriptOutput.pfpImages[4];
                             break;
                     }
                 }
+                RectTransform chatItemRect = chatItem.GetComponent<RectTransform>();
+                chatItemRect.anchoredPosition = new Vector2(0, -i * itemHeight);
+
             }
+            RectTransform contentRect = content.GetComponent<RectTransform>();
+            contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, scriptOutput.count * itemHeight);
         }
     }
 
