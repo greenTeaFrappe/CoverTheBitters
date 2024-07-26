@@ -7,11 +7,13 @@ public class CollectAndSaveImg : MonoBehaviour
     private const string EAIMG_KEY = "EAIMG"; // EAIMG 이미지를 저장할 플레이어 프레프스 키
     private const string SAIMG_KEY = "SAIMG"; // SAIMG 이미지를 저장할 플레이어 프레프스 키
 
+
     // Start is called before the first frame update
     void Start()
     {
         saveImgCav.gameObject.SetActive(false);
     }
+
 
     public void HandleMouseClick()
     {
@@ -21,7 +23,6 @@ public class CollectAndSaveImg : MonoBehaviour
         {
             saveImgCav.gameObject.SetActive(true);
             
-
             RawImage imageToCollect = GameObject.Find("saveImgCav").GetComponentInChildren<RawImage>(); // 수집할 이미지를 보유하는 UI 요소에 대한 참조
             collectAndSaveImg(imageToCollect, 0, EAIMG_KEY);
 

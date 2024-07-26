@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Diagnostics;
 
-
 public class ScriptOutput : MonoBehaviour
 {
     public Button[] btns;
@@ -27,6 +26,7 @@ public class ScriptOutput : MonoBehaviour
     public string[] texts;
     public int[] facialExpressions;
     public string[] names;
+    public Sprite[] pfpImages;
 
     public int count = 0;
     public Text nameText;
