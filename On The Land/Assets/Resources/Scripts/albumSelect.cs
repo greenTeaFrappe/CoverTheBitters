@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,36 +19,53 @@ public class albumSelect : MonoBehaviour
 
     public Button[] stBtns;
     public Button[] edBtns;
-    public GameObject saveImgCav;
+    public Button popUpBackBtn;
+    public GameObject popUpImageObject;
+    public Texture popUpTexture;
 
     void Start()
     {
+        if (popUpImageObject == null)
+        {
+            Debug.LogError("popUpImageObject is not assigned in the inspector.");
+            return; // Exit the Start method to prevent further errors
+        }
+
         EAScreen.SetActive(true);
         SAScreen.SetActive(false);
         Button Eabtn = EAChangeBtn.GetComponent<Button>();
         Button SAbtn = SAChangeBtn.GetComponent<Button>();
+        Button BPbtn = popUpBackBtn.GetComponent<Button>();
+        popUpBackBtn.gameObject.SetActive(false); // Pop-up back button initially inactive
         LoadCollectedImages();
         DisplayCollectedImages();
-        //HandleMouseClick();
-        saveImgCav.gameObject.SetActive(false);
+        popUpImageObject.SetActive(false);
 
-        for (int i = 0; i <stBtns.Length; i++)
+        for (int i = 0; i < stBtns.Length; i++)
         {
-           stBtns[i].gameObject.SetActive(false);
+            int index = i; // Use a local variable to capture the correct index
+            stBtns[i].gameObject.SetActive(true); // 버튼을 활성화합니다.
             stBtns[i].onClick.AddListener(() =>
-           {
-               //STHandleMouseClick(i);
-           });
+            {
+                STHandleMouseClick(index);
+            });
         }
 
         for (int i = 0; i < edBtns.Length; i++)
         {
+            int index = i; // Use a local variable to capture the correct index
             edBtns[i].gameObject.SetActive(true);
             edBtns[i].onClick.AddListener(() =>
             {
-                //EDHandleMouseClick(i);
+                EDHandleMouseClick(index);
             });
         }
+
+        popUpBackBtn.onClick.AddListener(() =>
+        {
+            popUpImageObject.SetActive(false);
+            popUpBackBtn.gameObject.SetActive(false); // Hide the back button
+        });
 
         Eabtn.onClick.AddListener(() =>
         {
@@ -59,7 +75,6 @@ public class albumSelect : MonoBehaviour
 
             LoadCollectedImages();
             DisplayCollectedImages();
-
         });
 
         SAbtn.onClick.AddListener(() =>
@@ -70,8 +85,35 @@ public class albumSelect : MonoBehaviour
 
             LoadCollectedImages();
             DisplayCollectedImages();
-
         });
+    }
+
+    void STHandleMouseClick(int i)
+    {
+        if (popUpImageObject != null)
+        {
+            popUpBackBtn.gameObject.SetActive(true); // Show the back button
+            popUpImageObject.SetActive(true);
+            RawImage rawImage = popUpImageObject.GetComponent<RawImage>();
+            if (rawImage != null)
+            {
+                rawImage.texture = stImageSlots[i].texture;
+            }
+        }
+    }
+
+    void EDHandleMouseClick(int i)
+    {
+        if (popUpImageObject != null)
+        {
+            popUpBackBtn.gameObject.SetActive(true); // Show the back button
+            popUpImageObject.SetActive(true);
+            RawImage rawImage = popUpImageObject.GetComponent<RawImage>();
+            if (rawImage != null)
+            {
+                rawImage.texture = edImageSlots[i].texture;
+            }
+        }
     }
 
     // Load collected images
@@ -82,7 +124,7 @@ public class albumSelect : MonoBehaviour
         {
             string imageKey = eventKey + "_" + i.ToString(); // Set image key
             UnityEngine.Debug.Log(imageKey);
-            
+
             if (PlayerPrefs.HasKey(imageKey))
             {
                 string base64EncodedImage = PlayerPrefs.GetString(imageKey); // Get Base64 encoded image
@@ -112,7 +154,6 @@ public class albumSelect : MonoBehaviour
     // Display collected images on UI
     void DisplayCollectedImages()
     {
-        
         for (int i = 0; i < stImageSlots.Length; i++)
         {
             if (collectedImages.Count > i)
@@ -137,14 +178,4 @@ public class albumSelect : MonoBehaviour
             }
         }
     }
-
-    //private void STHandleMouseClick(int i)
-    //{
-    //    
-    //}
-    //
-    //private void STHandleMouseClick(int i)
-    //{
-    //
-    //}
 }
