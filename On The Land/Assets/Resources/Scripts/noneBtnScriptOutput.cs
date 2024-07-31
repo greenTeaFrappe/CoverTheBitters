@@ -22,6 +22,10 @@ public class noneBtnScriptOutput : MonoBehaviour
     public string[] texts;
     public int[] facialExpressions;
     public string[] names;
+    public Sprite[] pfpImages;
+    public string[] locations;
+
+    public Text locationText;
 
     public int count = 0;
     public Text nameText;
@@ -30,6 +34,7 @@ public class noneBtnScriptOutput : MonoBehaviour
 
     private bool isButtonClicked = false;
     private Coroutine autoCoroutine;
+
     public string nextSceneName;
 
     private void Start()
@@ -76,6 +81,7 @@ public class noneBtnScriptOutput : MonoBehaviour
         {
             nameText.text = names[count];
             scripts.text = texts[count];
+            locationText.text = locations[count];
 
             //state 패턴 적용해야함
             ScriptOutputState state = GetComponent<ScriptOutputState>();
