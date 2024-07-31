@@ -5,15 +5,16 @@ public class endingCredits : MonoBehaviour
 {
     public float normalScrollSpeed = 20f; // 일반적인 크레딧 스크롤 속도
     public float fastScrollSpeed = 100f; // 빠른 크레딧 스크롤 속도
-    public RectTransform creditsText; // 크레딧 텍스트의 RectTransform
+    public RectTransform contentRect; // Scroll View > Viewport > Content의 RectTransform
+    public RectTransform viewportRect; // Scroll View > Viewport의 RectTransform
     public string sceneName = "4. MAIN"; // 이동할 씬의 이름
 
     private float currentScrollSpeed; // 현재 크레딧 스크롤 속도
 
     private void Start()
     {
-        // 크레딧 텍스트 시작 위치를 화면 아래로 설정
-        creditsText.anchoredPosition = new Vector2(0f, -Screen.height);
+        // 크레딧 텍스트 시작 위치를 Scroll View 아래로 설정
+        contentRect.anchoredPosition = new Vector2(0f, -viewportRect.rect.height);
 
         // 초기 크레딧 스크롤 속도 설정
         currentScrollSpeed = normalScrollSpeed;
@@ -21,11 +22,11 @@ public class endingCredits : MonoBehaviour
 
     private void Update()
     {
-        // 크레딧을 아래로 스크롤
-        creditsText.anchoredPosition += Vector2.up * currentScrollSpeed * Time.deltaTime;
+        // 크레딧을 위로 스크롤
+        contentRect.anchoredPosition += Vector2.up * currentScrollSpeed * Time.deltaTime;
 
-        // 만약 크레딧이 화면을 벗어나면 다음 씬으로 전환
-        if (creditsText.anchoredPosition.y >= 0f)
+        // 만약 크레딧이 Scroll View를 벗어나면 다음 씬으로 전환
+        if (contentRect.anchoredPosition.y >= contentRect.rect.height - viewportRect.rect.height)
         {
             ChangeScene();
         }

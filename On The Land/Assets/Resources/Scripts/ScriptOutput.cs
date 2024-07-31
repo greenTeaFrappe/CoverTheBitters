@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using System.Diagnostics;
 
 public class ScriptOutput : MonoBehaviour
 {
@@ -27,6 +26,9 @@ public class ScriptOutput : MonoBehaviour
     public int[] facialExpressions;
     public string[] names;
     public Sprite[] pfpImages;
+    public string[] locations;
+
+    public Text locationText;
 
     public int count = 0;
     public Text nameText;
@@ -66,6 +68,24 @@ public class ScriptOutput : MonoBehaviour
         });
 
         nameScreen.gameObject.SetActive(false);
+
+        InsertPlayerName();
+    }
+
+    private void InsertPlayerName()
+    {
+        // PlayerPrefs에서 저장된 플레이어 이름을 불러옵니다.
+        string playerName = PlayerPrefs.GetString("PlayerName", "Player");
+        string firstName = PlayerPrefs.GetString("FirstName", "First");
+        string secondName = PlayerPrefs.GetString("SecondName", "Second"); // 여기 수정
+
+        // texts 배열에서 플레이어 이름이 들어갈 부분을 설정합니다.
+        for (int i = 0; i < texts.Length; i++)
+        {
+            texts[i] = texts[i].Replace("{PLAYER_NAME}", playerName);
+            texts[i] = texts[i].Replace("{FIRST_NAME}", firstName);
+            texts[i] = texts[i].Replace("{SECOND_NAME}", secondName);
+        }
     }
 
     //클릭 시 다음 대사로
@@ -90,6 +110,7 @@ public class ScriptOutput : MonoBehaviour
         {
             nameText.text = names[count];
             scripts.text = texts[count];
+            locationText.text = locations[count];
 
             //state 패턴 적용
             ScriptOutputState state = GetComponent<ScriptOutputState>();
@@ -105,6 +126,10 @@ public class ScriptOutput : MonoBehaviour
             {
                 nameScreen.gameObject.SetActive(true);
             }
+            if(count == 3&&SceneManager.GetActiveScene().name == "4. DAY1-2a")
+            {
+                InsertPlayerName();
+            }
             count++;
         }
         else
@@ -115,6 +140,7 @@ public class ScriptOutput : MonoBehaviour
             }
         }
     }
+
 
     //자동진행
     private void autoBtnClick()

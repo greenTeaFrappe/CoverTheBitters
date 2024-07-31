@@ -10,6 +10,8 @@ public class nameInput : MonoBehaviour
     public GameObject popupPanel; // 팝업창 오브젝트
 
     private const string playerNameKey = "PlayerName";
+    private const string firstNameKey = "FirstName";
+    private const string secondNameKey = "SecondName";
     private const int firstNameMaxLength = 6;
     private const int secondNameMaxLength = 2;
 
@@ -30,11 +32,14 @@ public class nameInput : MonoBehaviour
         // 유효성 검사
         if (IsValidName(firstName) && IsValidName(secondName))
         {
-            // 조건을 만족하는 경우에만 값을 저장하고 팝업창을 닫습니다.
             string playerName = firstName + " " + secondName;
-            PlayerPrefs.SetString(playerNameKey, playerName);
+            PlayerPrefs.SetString("PlayerName", playerName); // 수정된 부분
+            PlayerPrefs.SetString("FirstName", firstName); // 수정된 부분
+            PlayerPrefs.SetString("SecondName", secondName); // 수정된 부분
             PlayerPrefs.Save();
             Debug.Log("Player name saved: " + playerName);
+            Debug.Log("FirstName saved: " + firstName); // 추가된 디버그 로그
+            Debug.Log("SecondName saved: " + secondName); // 추가된 디버그 로그
 
             // 팝업창을 닫습니다.
             popupPanel.SetActive(false);
