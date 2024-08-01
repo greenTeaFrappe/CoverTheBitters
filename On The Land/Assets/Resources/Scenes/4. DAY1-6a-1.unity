@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 23382907}
   - component: {fileID: 23382911}
   - component: {fileID: 23382914}
+  - component: {fileID: 23382915}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -474,12 +475,28 @@ MonoBehaviour:
   - {fileID: 203811261}
   - {fileID: 353245794}
   popUpScreen: {fileID: 478952981}
-  settingPopUpScreen: {fileID: 0}
+  settingPopUpScreen: {fileID: 627130145}
   saveButton: {fileID: 1388806902}
   loadButton: {fileID: 387063914}
   deleteButton: {fileID: 273731333}
-  settingBtn: {fileID: 0}
-  settingBackBtn: {fileID: 0}
+  settingBtn: {fileID: 1957014812}
+  settingBackBtn: {fileID: 2134110104}
+--- !u!114 &23382915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23382902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f37b7d245fcb645b34961b785cf522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundVolumeSlider: {fileID: 1895043063}
+  soundEffectVolumeSlider: {fileID: 354571083}
+  backgroundVolumeText: {fileID: 1217896435}
+  soundEffectVolumeText: {fileID: 715061368}
 --- !u!1 &34884206
 GameObject:
   m_ObjectHideFlags: 0

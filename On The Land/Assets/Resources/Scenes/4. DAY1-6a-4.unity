@@ -226,6 +226,7 @@ RectTransform:
   - {fileID: 1213964014}
   - {fileID: 1483796328}
   - {fileID: 478952982}
+  - {fileID: 1153214577}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -249,6 +250,7 @@ GameObject:
   - component: {fileID: 23382907}
   - component: {fileID: 23382911}
   - component: {fileID: 23382914}
+  - component: {fileID: 23382915}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -393,12 +395,28 @@ MonoBehaviour:
   - {fileID: 203811261}
   - {fileID: 353245794}
   popUpScreen: {fileID: 478952981}
-  settingPopUpScreen: {fileID: 0}
+  settingPopUpScreen: {fileID: 1153214576}
   saveButton: {fileID: 1388806902}
   loadButton: {fileID: 387063914}
   deleteButton: {fileID: 273731333}
-  settingBtn: {fileID: 0}
-  settingBackBtn: {fileID: 0}
+  settingBtn: {fileID: 1957014812}
+  settingBackBtn: {fileID: 201453451}
+--- !u!114 &23382915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23382902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f37b7d245fcb645b34961b785cf522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundVolumeSlider: {fileID: 248677284}
+  soundEffectVolumeSlider: {fileID: 1764658999}
+  backgroundVolumeText: {fileID: 831265861}
+  soundEffectVolumeText: {fileID: 641267146}
 --- !u!1 &34884206
 GameObject:
   m_ObjectHideFlags: 0
@@ -7426,12 +7444,12 @@ RectTransform:
   - {fileID: 685124095}
   - {fileID: 640837274}
   - {fileID: 201453450}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 10909933}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 960, y: 540}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1162374772
