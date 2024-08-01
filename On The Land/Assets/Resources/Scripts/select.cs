@@ -10,13 +10,20 @@ public class select : MonoBehaviour
     bool[] saveFile = new bool[5]; // 세이브 파일이 있는지 여부를 저장하는 배열
 
     public GameObject popUpScreen;
+    public GameObject settingPopUpScreen;
     public Button saveButton;
     public Button loadButton;
     public Button deleteButton;
+    public Button settingBtn;
+    public Button settingBackBtn;
 
     void Start()
     {
         popUpScreen.SetActive(false);
+        settingPopUpScreen.SetActive(false);
+        settingBtn.gameObject.SetActive(true);
+        settingBackBtn.gameObject.SetActive(false);
+        settingBtn.onClick.AddListener(TaskOnClick);
         InitializeSlots();
     }
 
@@ -102,5 +109,21 @@ public class select : MonoBehaviour
             PlayerPrefs.Save();
             slots[slotIndex].GetComponentInChildren<Text>().text = $"파일 {slotIndex + 1}\t\t{currentSceneName}\n\t\t\t\t{location}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t{currentTime}";
         }
+    }
+
+    void TaskOnClick()
+    {
+        settingBtn.gameObject.SetActive(false);
+        settingPopUpScreen.gameObject.SetActive(true);
+        settingBackBtn.gameObject.SetActive(true);
+
+        settingBackBtn.onClick.AddListener(Task2OnClick);
+    }
+
+    void Task2OnClick()
+    {
+        settingBtn.gameObject.SetActive(true);
+        settingBackBtn.gameObject.SetActive(false);
+        settingPopUpScreen.gameObject.SetActive(false);
     }
 }
