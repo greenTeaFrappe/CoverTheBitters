@@ -349,6 +349,7 @@ RectTransform:
   - {fileID: 297273420}
   - {fileID: 2127245716}
   - {fileID: 1575018037}
+  - {fileID: 1156809298}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -375,6 +376,7 @@ GameObject:
   - component: {fileID: 23382911}
   - component: {fileID: 23382914}
   - component: {fileID: 23382915}
+  - component: {fileID: 23382916}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -550,12 +552,12 @@ MonoBehaviour:
   - {fileID: 341347774}
   - {fileID: 493302525}
   popUpScreen: {fileID: 1575018036}
-  settingPopUpScreen: {fileID: 0}
+  settingPopUpScreen: {fileID: 1156809297}
   saveButton: {fileID: 221080174}
   loadButton: {fileID: 106482854}
   deleteButton: {fileID: 390927803}
-  settingBtn: {fileID: 0}
-  settingBackBtn: {fileID: 0}
+  settingBtn: {fileID: 1391317084}
+  settingBackBtn: {fileID: 993928553}
 --- !u!114 &23382915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +573,22 @@ MonoBehaviour:
   loadScreen: {fileID: 2127245715}
   loadBtn: {fileID: 1061867795}
   loadBackBtn: {fileID: 699451832}
+--- !u!114 &23382916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23382902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f37b7d245fcb645b34961b785cf522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundVolumeSlider: {fileID: 1806320554}
+  soundEffectVolumeSlider: {fileID: 108053387}
+  backgroundVolumeText: {fileID: 2067776506}
+  soundEffectVolumeText: {fileID: 1975062426}
 --- !u!1 &47108687
 GameObject:
   m_ObjectHideFlags: 0
@@ -8378,12 +8396,12 @@ RectTransform:
   - {fileID: 508545183}
   - {fileID: 626437713}
   - {fileID: 993928552}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 10909933}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 960, y: 540}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1168198222
